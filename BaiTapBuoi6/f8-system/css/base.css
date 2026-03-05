@@ -1,0 +1,31 @@
+h1{
+   color: red;
+   }
+h2{
+   color: green;
+   }
+h3{
+   color: blue;
+   }
+p{
+  color: yellow;
+  }
+.title{
+       color: purple;
+       }
+.section{
+         color: silver;
+         }
+.highlight{
+           color: brown;
+           }
+.big{
+     color: rgb(120, 40, 80);
+     }
+#main{
+      color: orange;
+      background-color: silver;
+      }
+#special{
+         color: rgba(100, 50, 150, 0,5);
+         }
