@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trung tâm điều chỉnh giao diện demo</title>
+        <style>
+            #light-theme:checked~label[for="light-theme"] {
+                background-color: #fff8cc;
+                color: #8b5e00;
+            }
+
+            #light-theme:checked~p#text-light {
+                background-color: #fff8cc;
+                color: #111827;
+            }
+
+            #dark-theme:checked~label[for="dark-theme"] {
+                background-color: #111827;
+                color: #f9fafb;
+            }
+
+            #dark-theme:checked~p#text-dark {
+                background-color: #111827;
+                color: #f9fafb;
+            }
+
+            #red:checked~label[for="red"] {
+                background-color: #fee2e2;
+                color: #991b1b;
+            }
+
+            #red:checked~p#text-red {
+                background-color: #fee2e2;
+                color: #7f1d1d;
+            }
+
+            #blue:checked~label[for="blue"] {
+                background-color: #dbeafe;
+                color: #1d4ed8;
+            }
+
+            #blue:checked~p#text-blue {
+                background-color: #dbeafe;
+                color: #1d4ed8;
+            }
+
+            #green:checked~label[for="green"] {
+                background-color: #dcfce7;
+                color: #166534;
+            }
+
+            #green:checked~p#text-green {
+                background-color: #dcfce7;
+                color: #166534;
+            }
+
+            #lang-vi:checked~label[for="lang-vi"] {
+                background-color: #bbf7d0;
+                color: #166534;
+            }
+
+            #lang-vi:checked~p#text-vi {
+                color: #166534;
+            }
+
+            #lang-en:checked~label[for="lang-en"] {
+                background-color: #bfdbfe;
+                color: #1d4ed8;
+            }
+
+            #lang-en:checked~p#text-en {
+                color: #1d4ed8;
+            }
+
+            #advanced:checked~label[for="advanced"] {
+                background-color: #fef3c7;
+                color: #92400e;
+            }
+
+            #advanced:checked~p#text-advanced {
+                background-color: #fef3c7;
+                color: #92400e;
+            }
+
+            #eco-mode:checked~label[for="eco-mode"] {
+                background-color: #bbf7d0;
+                color: #15803d;
+            }
+
+            #eco-mode:checked~p#text-eco-mode {
+                background-color: #fef3c7;
+                color: #166534;
+            }
+
+            #warn-notify:checked~label[for="warn-notify"] {
+                background-color: #fee2e2;
+                color: #b91c1c;
+            }
+
+            #warn-notify:checked~p#text-warn-notify {
+                background-color: #fee2e2;
+                color: #b91c1c;
+            }
+
+            label {
+                color: #9ca3af;
+            }
+
+            .panel {
+                background-color: #f9fafb;
+                color: #111827;
+                border: 1px solid #e5e7eb;
+            }
+
+            .text {
+                color: #9ca3af;
+            }
+
+            h1 {
+                background-color: #f98000;
+                color: #f9fafb;
+            }
+
+            .title {
+                font-size: 1rem;
+                line-height: 2rem;
+                background-color: #e5e7eb;
+                color: #111827;
+            }
+
+            label {
+                background-color: #eef2ff;
+                color: #4b5563;
+                cursor: pointer;
+            }
+
+            .text {
+                background-color: #f3f4f6;
+                color: #111827;
+                line-height: 2.25rem;
+            }
+
+            .text {
+                background-color: #ffffff;
+                color: #9ca3af;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="panel">
+            <h1>Trung tâm điều chỉnh giao diện demo</h1>
+            <!--THEME-->
+            <p class="title">Chọn giao diện (Theme):</p>
+            <br>
+            <input type="radio" id="light-theme" name="theme-color">
+            <label for="light-theme" class="theme-color">Light</label>
+            <input type="radio" id="dark-theme" name="theme-color">
+            <label for="dark-theme" class="theme-color">Dark</label>
+            <br>
+            <!--COLOR-->
+            <p class="title">Chọn màu chủ đạo (Color):</p>
+            <br>
+            <input type="radio" id="red" name="main-color">
+            <label for="red">Red</label>
+            <input type="radio" id="blue" name="main-color">
+            <label for="blue">Blue</label>
+            <input type="radio" id="green" name="main-color">
+            <label for="green">Green</label>
+            <br>
+            <!--LANG-->
+            <p class="title">Chọn ngôn ngữ (Language):</p>
+            <br>
+            <input type="radio" id="lang-vi" name="lang">
+            <label for="lang-vi">VI</label>
+            <input type="radio" id="lang-en" name="lang">
+            <label for="lang-en">EN</label>
+            <!--OPTION-->
+            <p class="title">Tuỳ chọn bổ sung (Options - Checkbox):</p>
+            <br>
+            <input type="checkbox" id="advanced" name="option">
+            <label for="advanced">Hiển thị mô tả nâng cao</label>
+            <input type="checkbox" id="eco-mode" name="option">
+            <label for="eco-mode">Bật chế độ Eco</label>
+            <input type="checkbox" id="warn-notify" name="option">
+            <label for="warn-notify">Hiển thị cảnh báo quan trọng</label>
+            <br>
+            <!--TEXT-->
+            <p id="text-light" class="text">Theme Light: Giao diện sáng, chữ đen.</p>
+            <p id="text-dark" class="text">Theme Dark: Giao diện tối, chữ sáng.</p>
+            <p id="text-red" class="text">Màu Red: được nhấn mạnh khi chọn Red.</p>
+            <p id="text-blue" class="text">Màu Blue: được nhấn mạnh khi chọn Blue.</p>
+            <p id="text-green" class="text">Màu Green: được nhấn mạnh khi chọn Green.</p>
+            <p id="text-vi" class="text">[VI]Xin chào bạn! Khi chọn VI, dòng này rõ hơn.</p>
+            <p id="text-en" class="text">[EN]Hello, world! khi chọn EN, dòng này rõ hơn.</p>
+            <p id="text-advanced" class="text">Mô tả nâng cao: giải thích kỹ hơn về cách các lựa chọn đang ảnh hưởng giao diện.</p>
+            <p id="text-eco-mode" class="text">Chế độ Eco: mô phỏng trạng thái tiết kiệm tài nguyên cho giao diện.</p>
+            <p id="text-warn-notify" class="text">Cảnh báo quan trọng: khu vực dùng để nhấn mạnh thông tin hệ thống.</p>
+        </div>
+    </body>
+</html>
