@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            .layout {
+                display: flex;
+                background-color: #eee;
+                width: 100%;
+                height: 100vh;
+                font-family: Arial, sans-serif;
+            }
+
+            input {
+                display: none;
+            }
+
+            .skills {
+                display: flex;
+                list-style: none;
+                gap: 10px;
+            }
+
+            .skills-detail {
+                background-color: #f0f0f0;
+                padding: 0.8em;
+            }
+
+            .hobbys {
+                display: flex;
+                gap: 10px;
+            }
+
+            .control-panel {
+                width: calc(100% - 65vw);
+                background-color: #f5f5f5;
+                margin: 30px 20px 0px 20px;
+            }
+
+            .control-panel label {
+                background-color: #ddd;
+                cursor: pointer;
+                line-height: 2rem;
+                padding: 0em 1em;
+            }
+
+            .preview-wrapper {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                width: calc(100% - 35vw);
+            }
+
+            .preview-area {
+                flex: 1;
+            }
+
+            .preview-area {
+                text-align: center;
+            }
+
+            .preview-area .contact-button {
+                text-align: center;
+            }
+
+            .text {
+                font-size: 20px;
+                background-color: #eee;
+                padding: 20px;
+            }
+
+            #layout-light:checked~.preview-wrapper .preview-area {
+                background-color: white;
+            }
+
+            #layout-gray:checked~.preview-wrapper .preview-area {
+                background-color: lightgray;
+            }
+
+            #layout-yellow:checked~.preview-wrapper .preview-area {
+                background-color: lightyellow;
+            }
+
+            #layout-blue:checked~.preview-wrapper .preview-area {
+                background-color: lightblue;
+            }
+
+            #layout-pink:checked~.preview-wrapper .preview-area {
+                background-color: pink;
+            }
+
+            #name-dark:checked~.preview-wrapper .preview-area .name {
+                color: black;
+                line-height: 1.2rem;
+            }
+
+            #name-blue:checked~.preview-wrapper .preview-area .name {
+                color: blue;
+                line-height: 1.2rem;
+            }
+
+            #name-green:checked~.preview-wrapper .preview-area .name {
+                color: green;
+                line-height: 1.2rem;
+            }
+
+            #name-red:checked~.preview-wrapper .preview-area .name {
+                color: red;
+                line-height: 1.2rem;
+            }
+
+            #button-dark:checked~.preview-wrapper .preview-area .contact-button {
+                background-color: #1a1a1a;
+                padding: 1em 1em;
+                color: white;
+                display: inline-block;
+                text-decoration: none;
+                margin: 20px auto;
+            }
+
+            #button-blue:checked~.preview-wrapper .preview-area .contact-button {
+                background-color: blue;
+                padding: 1em 1em;
+                color: white;
+                display: inline-block;
+                text-decoration: none;
+                margin: 20px auto;
+            }
+
+            #button-light:checked~.preview-wrapper .preview-area .contact-button {
+                background-color: #f5f5f5;
+                padding: 1em 1em;
+                color: black;
+                display: inline-block;
+                text-decoration: none;
+                margin: 20px auto;
+            }
+
+            #name-small:checked~.preview-wrapper .preview-area .name {
+                font-size: 2rem;
+                line-height: 1.2rem;
+            }
+
+            #name-medium:checked~.preview-wrapper .preview-area .name {
+                font-size: 2.3rem;
+                line-height: 1.2rem;
+            }
+
+            #name-large:checked~.preview-wrapper .preview-area .name {
+                font-size: 2.75rem;
+                line-height: 1.2rem;
+            }
+
+            #name-normal:checked~.preview-wrapper .preview-area .name {
+                text-transform: capitalize;
+                line-height: 1.2rem;
+            }
+
+            #name-uppercase:checked~.preview-wrapper .preview-area .name {
+                text-transform: uppercase;
+                line-height: 1.2rem;
+            }
+
+            #alignment-left:checked~.preview-wrapper .skills {
+                justify-content: flex-start;
+            }
+
+            #alignment-center:checked~.preview-wrapper .skills {
+                justify-content: center;
+            }
+
+            #alignment-right:checked~.preview-wrapper .skills {
+                justify-content: flex-end;
+            }
+
+            #alignment-left:checked~.preview-wrapper .preview-area {
+                text-align: left;
+            }
+
+            #alignment-center:checked~.preview-wrapper .preview-area {
+                text-align: center;
+            }
+
+            #alignment-right:checked~.preview-wrapper .preview-area {
+                text-align: right;
+            }
+
+            #alignment-left:checked~.preview-wrapper .preview-area .hobbys {
+                justify-content: flex-start;
+            }
+
+            #alignment-center:checked~.preview-wrapper .preview-area .hobbys {
+                justify-content: center;
+            }
+
+            #alignment-right:checked~.preview-wrapper .preview-area .hobbys {
+                justify-content: flex-end;
+            }
+
+            #job-small:checked~.preview-wrapper .preview-area .profile-job {
+                font-size: 0.9rem;
+                line-height: 1.5rem;
+            }
+
+            #job-medium:checked~.preview-wrapper .preview-area .profile-job {
+                font-size: 1.1rem;
+                line-height: 1.5rem;
+            }
+
+            #job-large:checked~.preview-wrapper .preview-area .profile-job {
+                font-size: 1.3rem;
+                line-height: 1.5rem;
+            }
+
+            #job-tight:checked~.preview-wrapper .preview-area .profile-job {
+                letter-spacing: -0.03em;
+                line-height: 1.5rem;
+            }
+
+            #job-normal:checked~.preview-wrapper .preview-area .profile-job {
+                letter-spacing: 0.02em;
+                line-height: 1.5rem;
+            }
+
+            #job-wide:checked~.preview-wrapper .preview-area .profile-job {
+                letter-spacing: 0.18em;
+                line-height: 1.5rem;
+            }
+
+            #desc-small:checked~.preview-wrapper .preview-area .profile-desc {
+                font-size: 0.9rem;
+                line-height: 1.6rem;
+            }
+
+            #desc-medium:checked~.preview-wrapper .preview-area .profile-desc {
+                font-size: 1.0rem;
+                line-height: 1.8rem;
+            }
+
+            #desc-large:checked~.preview-wrapper .preview-area .profile-desc {
+                font-size: 1.125rem;
+                line-height: 2rem;
+            }
+
+            #line-height-tight:checked~.preview-wrapper .preview-area .profile-desc {
+                letter-spacing: -0.03em;
+                line-height: 1.6rem;
+            }
+
+            #line-height-normal:checked~.preview-wrapper .preview-area .profile-desc {
+                letter-spacing: 0.02em;
+                line-height: 1.8rem;
+            }
+
+            #line-height-loose:checked~.preview-wrapper .preview-area .profile-desc {
+                letter-spacing: 0.18em;
+                line-height: 2rem;
+            }
+
+            .text {
+                font-size: 20px;
+                background-color: #eee;
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="layout">
+            <!--1-->
+            <input type="radio" id="layout-light" name="layout-color">
+            <input type="radio" id="layout-gray" name="layout-color">
+            <input type="radio" id="layout-yellow" name="layout-color">
+            <input type="radio" id="layout-blue" name="layout-color">
+            <input type="radio" id="layout-pink" name="layout-color" checked>
+            <!--2-->
+            <input type="radio" id="name-small" name="name-size" checked>
+            <input type="radio" id="name-medium" name="name-size">
+            <input type="radio" id="name-large" name="name-size">
+            <!--3-->
+            <input type="radio" id="name-normal" name="name-type" checked>
+            <input type="radio" id="name-uppercase" name="name-type">
+            <!--4-->
+            <input type="radio" id="name-dark" name="name-color" checked>
+            <input type="radio" id="name-blue" name="name-color">
+            <input type="radio" id="name-green" name="name-color">
+            <input type="radio" id="name-red" name="name-color">
+            <!--5-->
+            <input type="radio" id="alignment-left" name="alignment">
+            <input type="radio" id="alignment-center" name="alignment" checked>
+            <input type="radio" id="alignment-right" name="alignment">
+            <!--6-->
+            <input type="radio" id="job-small" name="job-title-size">
+            <input type="radio" id="job-medium" name="job-title-size">
+            <input type="radio" id="job-large" name="job-title-size" checked>
+            <!--7-->
+            <input type="radio" id="job-tight" name="job-letter-spacing">
+            <input type="radio" id="job-normal" name="job-letter-spacing" checked>
+            <input type="radio" id="job-wide" name="job-letter-spacing">
+            <!--8-->
+            <input type="radio" id="desc-small" name="desc-size">
+            <input type="radio" id="desc-medium" name="desc-size" checked>
+            <input type="radio" id="desc-large" name="desc-size">
+            <!--9-->
+            <input type="radio" id="line-height-tight" name="line-height">
+            <input type="radio" id="line-height-normal" name="line-height" checked>
+            <input type="radio" id="line-height-loose" name="line-height">
+            <!--10-->
+            <input type="radio" id="button-dark" name="button-color">
+            <input type="radio" id="button-blue" name="button-color" checked>
+            <input type="radio" id="button-light" name="button-color">
+            <div class="control-panel">
+                <!--CONTROL-->
+                <h2>Tuỳ chỉnh hồ sơ</h2>
+                <p>1. Màu nền hồ sơ</p>
+                <label for="layout-light">Light</label>
+                <label for="layout-gray">Gray</label>
+                <label for="layout-yellow">Yellow</label>
+                <label for="layout-blue">Blue</label>
+                <br>
+                <label for="layout-pink">Pink</label>
+                <p>2. Kích thước tên</p>
+                <label for="name-small">Small</label>
+                <label for="name-medium">Medium</label>
+                <label for="name-large">Large</label>
+                <p>3. Kiểu chữ tên</p>
+                <label for="name-normal">Normal</label>
+                <label for="name-uppercase">Uppercase</label>
+                <p>4. Màu chữ tên</p>
+                <label for="name-dark">Dark</label>
+                <label for="name-blue">Blue</label>
+                <label for="name-green">Green</label>
+                <label for="name-red">Red</label>
+                <p>5. Căn lề hồ sơ</p>
+                <label for="alignment-left">Left</label>
+                <label for="alignment-center">Center</label>
+                <label for="alignment-right">Right</label>
+                <p>6. Kích thước nghề nghiệp</p>
+                <label for="job-small">Small</label>
+                <label for="job-medium">Medium</label>
+                <label for="job-large">Large</label>
+                <p>7. Khoàng cách chữ nghề nghiệp</p>
+                <label for="job-tight">Tight</label>
+                <label for="job-normal">Normal</label>
+                <label for="job-wide">Wide</label>
+                <p>8. Kích thước mô tả</p>
+                <label for="desc-small">Small</label>
+                <label for="desc-medium">Medium</label>
+                <label for="desc-large">Large</label>
+                <p>9. Giãn dòng mô tả</p>
+                <label for="line-height-tight">Tight</label>
+                <label for="line-height-normal">Normal</label>
+                <label for="line-height-loose">Losse</label>
+                <p>10. Màu nút liên hệ</p>
+                <label for="button-dark">Dark</label>
+                <label for="button-blue">Blue</label>
+                <label for="button-light">Light</label>
+            </div>
+            <div class="preview-wrapper">
+                <div class="text">Preview hồ sơ cá nhân</div>
+                <div class="preview-area">
+                    <!--PREVIEW-->
+                    <p class="name">Nguyễn Minh Khoa</p>
+                    <p class="profile-job">Frontend Developer ・ Ho Chi Minh City</p>
+                    <p class="profile-desc">Tôi là một lập trình viên Frontend với hơn 3 năm kinh nghiệm xây dựng giao diện web hiện đại, tập trung vào hiệu suất và trải nghiệm người dùng. Tôi yêu thích việc biến ý tưởng sáng tạo thành sản phẩm thực tế.</p>
+                    <p> Kỹ năng</p>
+                    <div class="skills">
+                        <div class="skills-detail">HTML5</div>
+                        <div class="skills-detail">CSS3</div>
+                        <div class="skills-detail">JavaScript</div>
+                        <div class="skills-detail">React</div>
+                        <div class="skills-detail">Figma</div>
+                        <div class="skills-detail">Git</div>
+                    </div>
+                    <p>Sở thích</p>
+                    <div class="hobbys">
+                        <div>Nhiếp ảnh</div>
+                        <div>Đọc sách</div>
+                        <div>Du lịch</div>
+                        <div>Cà phê</div>
+                    </div>
+                    <br>
+                    <a href="#" class="contact-button">Liên hệ với tôi</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
