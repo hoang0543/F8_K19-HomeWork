@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      /*CSS các hình từ 1-7*/
+      .square {
+        width: 120px;
+        height: 120px;
+        border: 5px solid red;
+        color: transparent;
+        margin-right: 15px;
+      }
+
+      .rectangle {
+        width: 120px;
+        height: 80px;
+        border: 5px solid blue;
+        color: transparent;
+        margin-right: 25px;
+      }
+
+      .triangle-1 {
+        width: 0;
+        height: 0;
+        border-left: 60px solid transparent;
+        border-right: 60px solid transparent;
+        border-bottom: 120px solid green;
+        margin-right: 50px;
+      }
+
+      .triangle-2 {
+        width: 0;
+        height: 0;
+        border-left: 60px solid transparent;
+        border-right: 60px solid transparent;
+        border-top: 120px solid orange;
+        margin-right: 40px;
+      }
+
+      .triangle-3 {
+        width: 0;
+        height: 0;
+        border-top: 60px solid transparent;
+        border-bottom: 60px solid transparent;
+        border-right: 120px solid purple;
+        margin-right: 40px;
+      }
+
+      .triangle-4 {
+        width: 0;
+        height: 0;
+        border-top: 60px solid transparent;
+        border-bottom: 60px solid transparent;
+        border-left: 120px solid brown;
+        margin-right: 15px;
+      }
+
+      .trapezoid {
+        width: 100px;
+        border-bottom: 120px solid blue;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+      }
+
+      .square,
+      .rectangle,
+      .triangle-1,
+      .triangle-2,
+      .triangle-3,
+      .triangle-4,
+      .trapezoid {
+        display: inline-block;
+      }
+
+      p {
+        display: inline-block;
+        font-size: 0.6;
+        margin-right: 30px;
+      }
+
+      /*CSS các hình từ 8-13*/
+      .triangle-obtuse {
+        width: 0;
+        height: 0;
+        border-left: 70px solid transparent;
+        border-right: 70px solid transparent;
+        border-bottom: 50px solid gray;
+        margin-right: 70px;
+      }
+
+      .triangle-acute {
+        width: 0;
+        height: 0;
+        border-left: 30px solid transparent;
+        border-right: 30px solid transparent;
+        border-bottom: 120px solid orange;
+        margin-right: 65px;
+      }
+
+      .triangle-isosceles {
+        width: 0;
+        height: 0;
+        border-left: 60px solid transparent;
+        border-right: 60px solid transparent;
+        border-bottom: 80px solid orange;
+        margin-right: 70px;
+      }
+
+      .arrow-right {
+        width: 0;
+        height: 0;
+        border-top: 40px solid transparent;
+        border-bottom: 40px solid transparent;
+        border-left: 80px solid lightblue;
+        margin-right: 70px;
+      }
+
+      .arrow-left {
+        width: 0;
+        height: 0;
+        border-top: 40px solid transparent;
+        border-bottom: 40px solid transparent;
+        border-right: 80px solid purple;
+        margin-right: 40px;
+      }
+
+      .ribon {
+        width: 110px;
+        height: 0px;
+        border-top: 40px solid orange;
+        border-bottom: 40px solid orange;
+        border-left: 30px solid orange;
+        border-right: 30px solid transparent;
+      }
+
+      .triangle-obtuse,
+      .triangle-acute,
+      .triangle-isosceles,
+      .arrow-right,
+      .arrow-left,
+      .ribon {
+        display: inline-block;
+      }
+
+      /*CSS hình 14*/
+      .f-1 {
+        width: 90px;
+        height: 70px;
+        border-top: 30px solid orange;
+        border-bottom: 30px solid orange;
+        border-left: 30px solid orange;
+        margin-right: 30px;
+      }
+
+      .f-2 {
+        height: 110px;
+        border-left: 30px solid orange;
+        margin-right: 120px;
+      }
+
+      .number8-1 {
+        width: 90px;
+        height: 70px;
+        border: 30px solid orange;
+      }
+
+      .number8-2 {
+        width: 90px;
+        height: 80px;
+        border: 30px solid orange;
+        margin-top: -30px;
+      }
+
+      .f,
+      .number8 {
+        display: inline-block;
+      }
+    </style>
+    <title>Title</title>
+  </head>
+  <body>
+    <!--HTML các hình từ 1-7-->
+    <div class="square"></div>
+    <div class="rectangle"></div>
+    <div class="triangle-1"></div>
+    <div class="triangle-2"></div>
+    <div class="triangle-3"></div>
+    <div class="triangle-4"></div>
+    <div class="trapezoid"></div>
+    <br>
+    <!--Text các hình từ 1-7-->
+    <p>1. Hình vuông</p>
+    <p>2. Hình chữ nhật</p>
+    <p>3. Tam giác lên</p>
+    <p>4. Tam giác xuống</p>
+    <p>5. Tam giác trái</p>
+    <p>6. Tam giác phải</p>
+    <p>7. Hình thang</p>
+    <!--HTML các hình từ 8-13-->
+    <div class="triangle-obtuse"></div>
+    <div class="triangle-acute"></div>
+    <div class="triangle-isosceles"></div>
+    <div class="arrow-right"></div>
+    <div class="arrow-left"></div>
+    <div class="ribon"></div>
+    <br>
+    <!--Text các hình từ 8-13-->
+    <p>8. Tam giác rộng</p>
+    <p>9. Tam giác nhọn</p>
+    <p>10. Tam giác cân</p>
+    <p>11. Mũi tên phải</p>
+    <p>12. Mũi tên trái</p>
+    <p>13. Ribon/Lá cờ</p>
+    <br>
+    <!--HTML các hình từ 14-->
+    <div class="f">
+      <div class="f-1"></div>
+      <div class="f-2"></div>
+    </div>
+    <div class="number8">
+      <div class="number8-1"></div>
+      <div class="number8-2"></div>
+    </div>
+    <br>
+    <!--Text các hình từ 14-->
+    <p>14. F8</p>
+    <p></p>
+  </body>
+</html>

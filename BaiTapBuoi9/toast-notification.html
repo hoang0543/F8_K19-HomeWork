@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            /*CSS reset*/
+            body {
+                font-family: Arial, sans-serif;
+            }
+
+            /*CSS toast*/
+            .toast {
+                display: none;
+                color: white;
+                font-size: 2rem;
+                background-color: green;
+                padding: 25px;
+            }
+
+            /*CSS nút hiện toast*/
+            .open-btn {
+                display: inline-block;
+                color: white;
+                font-size: 2rem;
+                background-color: black;
+                padding: 25px;
+            }
+
+            /*CSS dấu X*/
+            .close-btn {
+                background-color: #999;
+                font-size: 2rem;
+                cursor: pointer;
+                padding: 12px;
+            }
+
+            /*Activity của toast*/
+            #toast-toggle:checked~.toast {
+                display: inline-block;
+                visibility: visible;
+            }
+        </style>
+    </head>
+    <body>
+        <label for="toast-toggle" class="open-btn">Hiện thông báo</label>
+        <input type="checkbox" id="toast-toggle" hidden>
+        <div class="toast">
+            <span class="icon">🎉</span>
+            <span class="toast-text">Lưu thành công!</span>
+            <label for="toast-toggle" class="close-btn">&times;</label>
+        </div>
+    </body>
+</html>
