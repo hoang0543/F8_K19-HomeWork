@@ -4,6 +4,10 @@ margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
+/*CSS kích thước mặc định*/
+html{
+font-size: 100%;
+}
 
 /*CSS phông chữ*/
 body {
@@ -98,13 +102,13 @@ display: inline-block;
 .input-1 > #name,
 .input-1 > #phone,
 .input-1 > #email{
-width: 100%;
+width: 32rem;
 height: 2.5rem;
 color: #64748b;
 background-color: #f8fafc;
 border: 0.1rem solid #e2e8f0;
 border-radius: 0.5rem;
-margin: 0.5rem;
+margin: 0.5rem 0rem;
 }
 
 /*CSS các nút*/
@@ -118,7 +122,7 @@ right: 2rem;
 .submit-btn{
 color: white;
 background-color: #a855f7;
-width: 100%;
+width: 31.5rem;
 height: 2.5rem;
 border: none;
 border-radius: 1.5rem;
