@@ -1,0 +1,397 @@
+/*Reset toàn bộ trang*/
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/*CSS phông chữ*/
+body {
+    font-family: Arial, sans-serif;
+    position: absolute;
+}
+/*CSS overlay khi mở modal*/
+.overlay{
+width: 100vw;
+height: 100vh;
+background-color: rgba(0, 0, 0, 0.5);
+position: fixed;
+display: none;
+}
+
+/*CSS background mặc định*/
+body{
+width: 100vw;
+height: 100vh;
+position: relative;
+background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+}
+
+/*CSS modal khi hiện lên*/
+.modal{
+width: 36rem;
+height: 40rem;
+background-color: white;
+border-radius: 1.5rem;
+position: fixed;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+margin: auto;
+padding: 2rem;
+display: none;
+}
+
+/*CSS các label trong modal*/
+.open-modal label{
+display: block;
+background-color: #f05123;
+border: 0.2rem solid #e2e8f0;
+border-radius: 2rem;
+width: 10rem;
+height: 4rem;
+position: absolute;
+}
+
+/*CSS text trong modal*/
+h2{
+color: #1e293b;
+font-size: 2rem;
+text-align: center;
+margin: 1rem 0;
+}
+
+.text-1{
+color: #334155;
+text-align: center;
+margin: 1rem;
+}
+
+.text-2{
+padding: 0.5rem 0;
+}
+
+/*CSS các dấu bắt buộc*/
+.force-1,
+.force-2,
+.force-3{
+color: #ef4444;
+}
+
+.name,
+.force-1{
+display: inline-block;
+}
+
+.phone,
+.force-2{
+display: inline-block;
+}
+
+.text-2,
+.force-3{
+display: inline-block;
+}
+
+/*CSS các title*/
+.input-1 > #name,
+.input-1 > #phone,
+.input-1 > #email{
+width: 100%;
+height: 2.5rem;
+color: #64748b;
+background-color: #f8fafc;
+border: 0.1rem solid #e2e8f0;
+border-radius: 0.5rem;
+margin: 0.5rem;
+}
+
+/*CSS các nút*/
+.close-btn{
+font-size: 1.5rem;
+position: absolute;
+top: 1rem;
+right: 2rem;
+}
+
+.submit-btn{
+color: white;
+background-color: #a855f7;
+width: 100%;
+height: 2.5rem;
+border: none;
+border-radius: 1.5rem;
+font-weight: bold;
+margin-top: 2.5rem;
+}
+
+body > button{
+width: 20rem;
+height: 10rem;
+font-size: 2rem;
+font-weight: bold;
+background-color: #f05123;
+border: none;
+border-radius: 5rem;
+display: inline-block;
+position: absolute;
+margin-top: 40vh;
+margin-left: 35vw;
+}
+
+/*CSS các tooltip*/
+.tooltip-name{
+position: absolute;
+top: -2rem;
+left: 0rem;
+width: 13rem;
+background-color: #1e293b;
+color: white;
+font-size: 0.75rem;
+padding: 0.5rem;
+border-radius: 0.5rem;
+}
+
+.tooltip-name-1{
+width:0;
+border-left: 0.5rem solid transparent;
+border-right: 0.5rem solid transparent;
+border-top: 0.75rem solid #1e293b;
+position: absolute;
+top: -0.5rem;
+left: 1rem;
+}
+
+.tooltip-phone{
+position: absolute;
+top: 2.5rem;
+left: 0rem;
+width: 16.5rem;
+background-color: #1e293b;
+color: white;
+font-size: 0.75rem;
+padding: 0.5rem;
+border-radius: 0.5rem;
+}
+
+.tooltip-phone-2{
+width:0;
+border-left: 0.5rem solid transparent;
+border-right: 0.5rem solid transparent;
+border-top: 0.75rem solid #1e293b;
+position: absolute;
+top: 4.2rem;
+left: 1rem;
+}
+
+.tooltip-email{
+position: absolute;
+top: 7.5rem;
+left: 0rem;
+width: 19rem;
+background-color: #1e293b;
+color: white;
+font-size: 0.75rem;
+padding: 0.5rem;
+border-radius: 0.5rem;
+}
+
+.tooltip-email-3{
+width:0;
+border-left: 0.5rem solid transparent;
+border-right: 0.5rem solid transparent;
+border-top: 0.75rem solid #1e293b;
+position: absolute;
+top: 9.2rem;
+left: 1rem;
+}
+
+.tooltip-htmlcss{
+position: absolute;
+top: -0.5rem;
+left: 0rem;
+width: 16rem;
+background-color: #1e293b;
+color: white;
+font-size: 0.75rem;
+padding: 0.5rem;
+border-radius: 0.5rem;
+}
+
+.tooltip-htmlcss-4{
+width:0;
+border-left: 0.5rem solid transparent;
+border-right: 0.5rem solid transparent;
+border-top: 0.75rem solid #1e293b;
+position: absolute;
+top: 1.3rem;
+left: 1rem;
+}
+
+.tooltip-js{
+position: absolute;
+top: 1rem;
+left: 0rem;
+width: 16rem;
+background-color: #1e293b;
+color: white;
+font-size: 0.75rem;
+padding: 0.5rem;
+border-radius: 0.5rem;
+}
+
+.tooltip-js-5{
+width:0;
+border-left: 0.5rem solid transparent;
+border-right: 0.5rem solid transparent;
+border-top: 0.75rem solid #1e293b;
+position: absolute;
+top: 2.8rem;
+left: 1rem;
+}
+
+.tooltip-front-end{
+position: absolute;
+top: 2rem;
+left: 0rem;
+width: 20rem;
+background-color: #1e293b;
+color: white;
+font-size: 0.75rem;
+padding: 0.5rem;
+border-radius: 0.5rem;
+}
+
+.tooltip-front-end-6{
+width:0;
+border-left: 0.5rem solid transparent;
+border-right: 0.5rem solid transparent;
+border-top: 0.75rem solid #1e293b;
+position: absolute;
+top: 3.8rem;
+left: 1rem;
+}
+
+.tooltip-react{
+position: absolute;
+top: 3rem;
+left: 0rem;
+width: 20rem;
+background-color: #1e293b;
+color: white;
+font-size: 0.75rem;
+padding: 0.5rem;
+border-radius: 0.5rem;
+}
+
+.tooltip-react-7{
+width:0;
+border-left: 0.5rem solid transparent;
+border-right: 0.5rem solid transparent;
+border-top: 0.75rem solid #1e293b;
+position: absolute;
+top: 4.8rem;
+left: 1rem;
+}
+
+.tooltip-unknown{
+position: absolute;
+top: 4rem;
+left: 0rem;
+width: 20rem;
+background-color: #1e293b;
+color: white;
+font-size: 0.75rem;
+padding: 0.5rem;
+border-radius: 0.5rem;
+}
+
+.tooltip-unknown-8{
+width:0;
+border-left: 0.5rem solid transparent;
+border-right: 0.5rem solid transparent;
+border-top: 0.75rem solid #1e293b;
+position: absolute;
+top: 5.8rem;
+left: 1rem;
+}
+
+.input-1,
+.input-2{
+position: relative;
+}
+
+.tooltip-1,
+.tooltip-2,
+.tooltip-3,
+.tooltip-4,
+.tooltip-5,
+.tooltip-6,
+.tooltip-7,
+.tooltip-8{
+opacity: 0;
+  visibility: hidden;
+}
+
+/*CSS activity hover*/
+#name:hover + .tooltip-1{
+opacity: 1;
+  visibility: visible;
+}
+
+#phone:hover + .tooltip-2{
+opacity: 1;
+  visibility: visible;
+}
+
+#email:hover + .tooltip-3{
+opacity: 1;
+  visibility: visible;
+}
+
+#htmlcss:hover ~ .tooltip-4{
+opacity: 1;
+  visibility: visible;
+}
+
+#js:hover ~ .tooltip-5{
+opacity: 1;
+  visibility: visible;
+}
+
+#front-end:hover ~ .tooltip-6{
+opacity: 1;
+  visibility: visible;
+}
+
+#react:hover ~ .tooltip-7{
+opacity: 1;
+  visibility: visible;
+}
+
+#unknown:hover ~ .tooltip-8{
+opacity: 1;
+  visibility: visible;
+}
+
+#open-btn:checked ~ .overlay,
+#open-btn:checked ~ .modal{
+  display: block;
+}
+
+.overlay:checked ~ .overlay{
+display: none;
+}
+
+body > button:hover{
+background-color: #d8431c;
+}
+
+.submit-btn:hover{
+background-color: #9333ea;
+}
+
+.input-1 > input:hover{
+border: 0.3rem solid #6b21a8;
+}

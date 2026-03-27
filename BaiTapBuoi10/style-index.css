@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+}
+/*CSS header*/
+.header img,
+.header nav,
+.header nav .menu > li,
+.header nav div {
+    display: inline-block;
+    vertical-align: middle;
+}
+/*CSS nền*/
+.overlay {
+    width: 1000px;
+    height: 600px;
+    border: 1px solid black;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/*CSS menu*/
+.menu > li {
+    color: #333333;
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    list-style: none;
+    background-color: #ffffff;
+    margin-right: 1.5625rem;
+    padding: 0.375rem 0;
+}
+
+/*CSS các mục con cấp 1*/
+.submenu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    color: #333333;
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    min-width: 12.5rem;
+}
+
+.submenu > li {
+    color: #333333;
+    font-size: 1rem;
+    padding: 0.375rem 0.625rem;
+    position: relative;
+    list-style: none;
+}
+
+/*CSS các mục con cấp 2*/
+.submenu-2 {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    color: #333333;
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    min-width: 12.5rem;
+}
+
+.submenu-2 > li {
+    color: #333333;
+    font-size: 1rem;
+    padding: 0.375rem 0.625rem;
+    position: relative;
+    list-style: none;
+}
+
+/*CSS tam giác nhỏ ở header*/
+.smalltriangle {
+    width: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid #555555;
+    margin-right: 25px;
+}
+
+/*CSS tam giác nhỏ ở submenu*/
+.smalltriangle-2 {
+    width: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 10px solid #777777;
+    padding-right: 15px;
+    margin-top: 8px;
+    position: absolute;
+    right: 15px;
+}
+
+/*CSS menu khi hover*/
+.menu > li:hover {
+    color: #d62828;
+    border-bottom: 2px solid #d62828;
+}
+/*Activity dropdown cấp 1*/
+.menu > li:hover > .submenu {
+    display: block;
+}
+
+/*CSS menu cấp 1 khi hover*/
+.submenu > li:hover {
+    color: #d62828;
+    background-color: #f5f5f5;
+}
+/*Activity dropdown cấp 2*/
+.submenu > li:hover > .submenu-2 {
+    display: block;
+}
+
+/*CSS menu cấp 2 khi hover*/
+.submenu-2 > li:hover {
+    color: #d62828;
+    background-color: #f5f5f5;
+}
+/*CSS khoảng cách từ ảnh đến menu*/
+img {
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.header {
+    border-bottom: 1px solid #dddddd;
+}
