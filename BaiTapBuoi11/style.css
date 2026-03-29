@@ -1,0 +1,134 @@
+.container{
+width: 600px;
+height: 200px;
+border: 3px solid red;
+margin: 10px;
+color: white;
+font-weight: bold;
+}
+
+.container div{
+width: 60px;
+height: 60px;
+background-color: blue;
+}
+
+/*Bài 1*/
+#container-1{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+}
+
+/*Bài 2*/
+#container-2{
+display: flex;
+flex-direction: row-reverse;
+justify-content: space-between;
+align-items: center;
+}
+
+/*Bài 3*/
+#container-3{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+#container-3 div:nth-child(2){
+margin-top: 20px;
+}
+
+#container-3 div:last-child{
+margin-top: 50px;
+}
+
+/*Bài 4*/
+#container-4{
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+}
+
+#container-4 div:nth-child(2){
+margin: 0 40px 0 10px;
+}
+
+/*Bài 5*/
+#container-5{
+display: flex;
+flex-direction: column-reverse;
+justify-content: center;
+align-items: center;
+}
+
+/*Bài 6*/
+#container-6{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+
+#container-6 div{
+margin-top: 5px;
+}
+
+/*Bài 7*/
+#container-7{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+#container-7 div:nth-child(2){
+margin: 60px 0 20px 0;
+}
+
+/*Bài 8*/
+#container-8{
+display: flex;
+align-items: center;
+}
+
+#container-8 div:nth-child(2){
+margin: auto;
+}
+
+/*Bài 9*/
+#container-9{
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+}
+
+#container-9 div:first-child{
+margin-top: -50px;
+}
+
+#container-9 div:last-child{
+margin-top: 50px;
+}
+
+/*Bài 10*/
+#container-10{
+display: flex;
+height: 200px;
+position: relative;
+}
+
+#container-10 div:nth-child(2){
+position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+margin: auto;
+}
+
+#container-10 div:last-child{
+margin-top: auto;
+margin-left: auto;
+}
