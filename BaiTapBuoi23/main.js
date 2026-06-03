@@ -14,7 +14,7 @@ const invoiceData = {
     date: "2026/05/21",
   },
   items: [
-    { name: "Ao Thun", size: "XL", qty: 1, price: 200000 },
+    { name: "Ao Thun", size: "XL", qty: 1, price: 300000 },
     { name: "Ao Thun", size: "XL", qty: 1, price: 200000 },
   ],
   discount: 0.5,
