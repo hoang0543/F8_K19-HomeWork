@@ -1,20 +1,11 @@
 {
   "customers": [
     {
-      "id": "CUST-002",
-      "companyName": "Cty Cổ Phần F10",
-      "email": "info@f9-corp.vn",
-      "phone": "0912345678",
-      "address": "Cầu Giấy, Hà Nội",
-      "taxId": "018381123413",
-      "status": "Active"
-    },
-    {
       "id": "CUST-004",
       "companyName": "Công ty TNHH ABC",
       "email": "sales@abc.vn",
       "phone": "0909123456",
-      "address": "Hải Châu, Đà Nẵng",
+      "address": "Hải Châu",
       "taxId": "0401234567",
       "status": "Inactive"
     },
@@ -62,15 +53,6 @@
       "address": "Đống Đa, Hà Nội",
       "taxId": "0108899001",
       "status": "Active"
-    },
-    {
-      "companyName": "hoàng hihii",
-      "email": "hoang@gmail.com",
-      "phone": "098776665",
-      "address": "hp",
-      "taxId": "8754344566",
-      "status": "Active",
-      "id": "dSAAsNy779Y"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
