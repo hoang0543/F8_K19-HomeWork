@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {
     Box,
     Stack,
@@ -27,6 +27,37 @@ import AssignmentTurnedInTwoToneIcon from '@mui/icons-material/AssignmentTurnedI
 import ThumbUpAltTwoToneIcon from '@mui/icons-material/ThumbUpAltTwoTone';
 import ListAltTwoToneIcon from '@mui/icons-material/ListAltTwoTone';
 import ApartmentTwoToneIcon from '@mui/icons-material/ApartmentTwoTone';
+
+import DescriptionTwoToneIcon from "@mui/icons-material/DescriptionTwoTone";
+import AutoAwesomeTwoToneIcon from "@mui/icons-material/AutoAwesomeTwoTone";
+import WorkspacePremiumTwoToneIcon from "@mui/icons-material/WorkspacePremiumTwoTone";
+import SchoolTwoToneIcon from "@mui/icons-material/SchoolTwoTone";
+
+import BusinessCenterTwoToneIcon from "@mui/icons-material/BusinessCenterTwoTone";
+import CodeTwoToneIcon from "@mui/icons-material/CodeTwoTone";
+import CalculateTwoToneIcon from "@mui/icons-material/CalculateTwoTone";
+import CampaignTwoToneIcon from "@mui/icons-material/CampaignTwoTone";
+
+import CloudUploadTwoToneIcon from "@mui/icons-material/CloudUploadTwoTone";
+import EditNoteTwoToneIcon from "@mui/icons-material/EditNoteTwoTone";
+import ArticleTwoToneIcon from "@mui/icons-material/ArticleTwoTone";
+
+import AccessTimeTwoToneIcon from "@mui/icons-material/AccessTimeTwoTone";
+import PercentTwoToneIcon from "@mui/icons-material/PercentTwoTone";
+import AccountBalanceWalletTwoToneIcon from "@mui/icons-material/AccountBalanceWalletTwoTone";
+import TranslateTwoToneIcon from "@mui/icons-material/TranslateTwoTone";
+import WorkHistoryTwoToneIcon from "@mui/icons-material/WorkHistoryTwoTone";
+
+import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
+import WorkTwoToneIcon from "@mui/icons-material/WorkTwoTone";
+import RecordVoiceOverTwoToneIcon from "@mui/icons-material/RecordVoiceOverTwoTone";
+import TrendingUpTwoToneIcon from "@mui/icons-material/TrendingUpTwoTone";
+import TipsAndUpdatesTwoToneIcon from "@mui/icons-material/TipsAndUpdatesTwoTone";
+
+import WorkOutlineTwoToneIcon from "@mui/icons-material/WorkOutlineTwoTone";
+import AccountBalanceTwoToneIcon from "@mui/icons-material/AccountBalanceTwoTone";
+import EngineeringTwoToneIcon from "@mui/icons-material/EngineeringTwoTone";
+import PeopleAltTwoToneIcon from "@mui/icons-material/PeopleAltTwoTone";
 
 const GREEN = "#00B14F";
 const GREEN_DARK = "#008C40";
@@ -138,8 +169,9 @@ function JobMegaMenu() {
         <Box
             sx={{
                 position: "absolute",
+                width: "80%",
                 top: "100%",
-                left: 0,
+                left: "10%",
                 right: 0,
                 bgcolor: "#fff",
                 borderTop: "1px solid #EAECF0",
@@ -326,6 +358,631 @@ function JobMegaMenu() {
     );
 }
 
+const CV_MENU = {
+    byStyle: {
+        title: "Mẫu CV theo style",
+        items: [
+            {
+                label: "Mẫu CV đơn giản",
+                icon: DescriptionTwoToneIcon,
+            },
+            {
+                label: "Mẫu CV ấn tượng",
+                icon: AutoAwesomeTwoToneIcon,
+            },
+            {
+                label: "Mẫu CV chuyên nghiệp",
+                icon: WorkspacePremiumTwoToneIcon,
+            },
+            {
+                label: "Mẫu CV Harvard",
+                icon: SchoolTwoToneIcon,
+            },
+        ],
+
+        position: {
+            title: "Mẫu CV theo vị trí ứng tuyển",
+            items: [
+                {
+                    label: "Nhân viên kinh doanh",
+                    icon: BusinessCenterTwoToneIcon,
+                },
+                {
+                    label: "Lập trình viên",
+                    icon: CodeTwoToneIcon,
+                },
+                {
+                    label: "Nhân viên kế toán",
+                    icon: CalculateTwoToneIcon,
+                },
+                {
+                    label: "Chuyên viên marketing",
+                    icon: CampaignTwoToneIcon,
+                },
+            ],
+        },
+    },
+
+    cvOption: [
+        {
+            label: "Quản lí CV",
+            icon: AssignmentTurnedInTwoToneIcon,
+        },
+        {
+            label: "Tải CV lên",
+            icon: CloudUploadTwoToneIcon,
+        },
+        {
+            label: "Hướng dẫn viết CV",
+            icon: EditNoteTwoToneIcon,
+        },
+        {
+            label: "Quản lí Cover Letter",
+            icon: DescriptionTwoToneIcon,
+        },
+        {
+            label: "Mẫu Cover Letter",
+            icon: ArticleTwoToneIcon,
+        },
+    ],
+}
+
+function CvMegaMenu() {
+    return (
+        <Box
+            sx={{
+                position: "absolute",
+                width: "80%",
+                top: "100%",
+                left: "10%",
+                bgcolor: "#fff",
+                borderTop: "1px solid #EAECF0",
+                boxShadow: "0 16px 32px rgba(16,24,40,0.12)",
+                px: {xs: 2, sm: 3, md: 5, lg: 7},
+                py: 4,
+                zIndex: 20,
+            }}
+        >
+            <Box
+                sx={{
+                    display: "grid",
+                    gridTemplateColumns: "280px 1fr 280px",
+                    gap: 6,
+                    alignItems: "start",
+                }}
+            >
+                {/* =========================
+                    CỘT 1: MẪU CV THEO STYLE
+                ========================== */}
+                <Box>
+                    <Typography
+                        sx={{
+                            fontSize: 20,
+                            fontWeight: 700,
+                            color: "#98A2B3",
+                            mb: 1.5,
+                            letterSpacing: 0.5,
+                        }}
+                    >
+                        {CV_MENU.byStyle.title}
+                    </Typography>
+
+                    <Stack spacing={0.8}>
+                        {CV_MENU.byStyle.items.map((item) => {
+                            const Icon = item.icon;
+
+                            return (
+                                <Stack
+                                    key={item.label}
+                                    direction="row"
+                                    alignItems="center"
+                                    spacing={1.5}
+                                    sx={{
+                                        px: 1,
+                                        py: 1,
+                                        borderRadius: 2,
+                                        cursor: "pointer",
+
+                                        "&:hover": {
+                                            bgcolor: "#F2FBF6",
+
+                                            "& .cv-menu-icon": {
+                                                color: GREEN,
+                                                transform: "scale(1.08)",
+                                            },
+
+                                            "& .cv-menu-text": {
+                                                color: GREEN,
+                                            },
+                                        },
+                                    }}
+                                >
+                                    <Icon
+                                        className="cv-menu-icon"
+                                        sx={{
+                                            fontSize: 25,
+                                            color: "#667085",
+                                            transition: "all 0.2s ease",
+                                        }}
+                                    />
+
+                                    <Typography
+                                        className="cv-menu-text"
+                                        sx={{
+                                            fontSize: 17,
+                                            color: NAVY,
+                                            transition: "color 0.2s ease",
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Typography>
+                                </Stack>
+                            );
+                        })}
+                    </Stack>
+                </Box>
+
+
+                {/* =================================
+                    CỘT 2: MẪU CV THEO VỊ TRÍ
+                ================================== */}
+                <Box>
+                    <Typography
+                        sx={{
+                            fontSize: 20,
+                            fontWeight: 700,
+                            color: "#98A2B3",
+                            mb: 1.5,
+                            letterSpacing: 0.5,
+                        }}
+                    >
+                        {CV_MENU.byStyle.position.title}
+                    </Typography>
+
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: "1fr 1fr",
+                            gap: 4,
+                        }}
+                    >
+                        <Stack spacing={1.2}>
+                            {CV_MENU.byStyle.position.items
+                                .slice(0, 2)
+                                .map((item) => {
+                                    const Icon = item.icon;
+
+                                    return (
+                                        <Stack
+                                            key={item.label}
+                                            direction="row"
+                                            alignItems="center"
+                                            spacing={1.5}
+                                            sx={{
+                                                px: 1,
+                                                py: 1,
+                                                borderRadius: 2,
+                                                cursor: "pointer",
+
+                                                "&:hover": {
+                                                    bgcolor: "#F2FBF6",
+
+                                                    "& .cv-position-icon": {
+                                                        color: GREEN,
+                                                        transform: "scale(1.08)",
+                                                    },
+
+                                                    "& .cv-position-text": {
+                                                        color: GREEN,
+                                                    },
+                                                },
+                                            }}
+                                        >
+                                            <Icon
+                                                className="cv-position-icon"
+                                                sx={{
+                                                    fontSize: 25,
+                                                    color: "#667085",
+                                                    transition: "all 0.2s ease",
+                                                }}
+                                            />
+
+                                            <Typography
+                                                className="cv-position-text"
+                                                sx={{
+                                                    fontSize: 17,
+                                                    color: NAVY,
+                                                    transition: "color 0.2s ease",
+                                                }}
+                                            >
+                                                {item.label}
+                                            </Typography>
+                                        </Stack>
+                                    );
+                                })}
+                        </Stack>
+
+                        <Stack spacing={1.2}>
+                            {CV_MENU.byStyle.position.items
+                                .slice(2)
+                                .map((item) => {
+                                    const Icon = item.icon;
+
+                                    return (
+                                        <Stack
+                                            key={item.label}
+                                            direction="row"
+                                            alignItems="center"
+                                            spacing={1.5}
+                                            sx={{
+                                                px: 1,
+                                                py: 1,
+                                                borderRadius: 2,
+                                                cursor: "pointer",
+
+                                                "&:hover": {
+                                                    bgcolor: "#F2FBF6",
+
+                                                    "& .cv-position-icon": {
+                                                        color: GREEN,
+                                                        transform: "scale(1.08)",
+                                                    },
+
+                                                    "& .cv-position-text": {
+                                                        color: GREEN,
+                                                    },
+                                                },
+                                            }}
+                                        >
+                                            <Icon
+                                                className="cv-position-icon"
+                                                sx={{
+                                                    fontSize: 25,
+                                                    color: "#667085",
+                                                    transition: "all 0.2s ease",
+                                                }}
+                                            />
+
+                                            <Typography
+                                                className="cv-position-text"
+                                                sx={{
+                                                    fontSize: 17,
+                                                    color: NAVY,
+                                                    transition: "color 0.2s ease",
+                                                }}
+                                            >
+                                                {item.label}
+                                            </Typography>
+                                        </Stack>
+                                    );
+                                })}
+                        </Stack>
+                    </Box>
+                </Box>
+
+
+                {/* =========================
+                    CỘT 3: CÔNG CỤ CV
+                ========================== */}
+                <Box>
+                    <Typography
+                        sx={{
+                            fontSize: 20,
+                            fontWeight: 700,
+                            color: "#98A2B3",
+                            mb: 1.5,
+                            letterSpacing: 0.5,
+                        }}
+                    >
+                        CÔNG CỤ CV
+                    </Typography>
+
+                    <Stack spacing={0.8}>
+                        {CV_MENU.cvOption.map((item) => {
+                            const Icon = item.icon;
+
+                            return (
+                                <Stack
+                                    key={item.label}
+                                    direction="row"
+                                    alignItems="center"
+                                    spacing={1.5}
+                                    sx={{
+                                        px: 1,
+                                        py: 1,
+                                        borderRadius: 2,
+                                        cursor: "pointer",
+
+                                        "&:hover": {
+                                            bgcolor: "#F2FBF6",
+
+                                            "& .cv-option-icon": {
+                                                color: GREEN,
+                                                transform: "scale(1.08)",
+                                            },
+
+                                            "& .cv-option-text": {
+                                                color: GREEN,
+                                            },
+                                        },
+                                    }}
+                                >
+                                    <Icon
+                                        className="cv-option-icon"
+                                        sx={{
+                                            fontSize: 25,
+                                            color: "#667085",
+                                            transition: "all 0.2s ease",
+                                        }}
+                                    />
+
+                                    <Typography
+                                        className="cv-option-text"
+                                        sx={{
+                                            fontSize: 17,
+                                            color: NAVY,
+                                            transition: "color 0.2s ease",
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Typography>
+                                </Stack>
+                            );
+                        })}
+                    </Stack>
+                </Box>
+            </Box>
+        </Box>
+    );
+}
+
+const TOOL_MENU = {
+    title: "CÔNG CỤ",
+    items: [
+        {
+            label: "Tính lương Gross - Net",
+            icon: AccountBalanceWalletTwoToneIcon,
+        },
+        {
+            label: "Tính bảo hiểm xã hội",
+            icon: CalculateTwoToneIcon,
+        },
+        {
+            label: "Tính thuế thu nhập cá nhân",
+            icon: PercentTwoToneIcon,
+        },
+        {
+            label: "Tính giờ làm việc",
+            icon: AccessTimeTwoToneIcon,
+        },
+        {
+            label: "Tra cứu ngành nghề",
+            icon: WorkHistoryTwoToneIcon,
+        },
+        {
+            label: "Công cụ dịch CV",
+            icon: TranslateTwoToneIcon,
+        },
+    ],
+};
+
+function ToolMegaMenu() {
+    return (
+        <Box
+            sx={{
+                position: "absolute",
+                width: "80%",
+                top: "100%",
+                left: "10%",
+                bgcolor: "#fff",
+                borderTop: "1px solid #EAECF0",
+                boxShadow: "0 16px 32px rgba(16,24,40,0.12)",
+                px: {xs: 2, sm: 3, md: 5, lg: 7},
+                py: 4,
+                zIndex: 20,
+            }}
+        >
+            <Typography
+                sx={{
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: "#98A2B3",
+                    mb: 2,
+                    letterSpacing: 0.5,
+                }}
+            >
+                {TOOL_MENU.title}
+            </Typography>
+
+            <Box
+                sx={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    columnGap: 6,
+                    rowGap: 1,
+                    maxWidth: 700,
+                }}
+            >
+                {TOOL_MENU.items.map((item) => {
+                    const Icon = item.icon;
+
+                    return (
+                        <Stack
+                            key={item.label}
+                            direction="row"
+                            alignItems="center"
+                            spacing={1.5}
+                            sx={{
+                                px: 1,
+                                py: 1.2,
+                                borderRadius: 2,
+                                cursor: "pointer",
+
+                                "&:hover": {
+                                    bgcolor: "#F2FBF6",
+
+                                    "& .tool-menu-icon": {
+                                        color: GREEN,
+                                        transform: "scale(1.08)",
+                                    },
+
+                                    "& .tool-menu-text": {
+                                        color: GREEN,
+                                    },
+                                },
+                            }}
+                        >
+                            <Icon
+                                className="tool-menu-icon"
+                                sx={{
+                                    fontSize: 26,
+                                    color: "#667085",
+                                    transition: "all 0.2s ease",
+                                }}
+                            />
+
+                            <Typography
+                                className="tool-menu-text"
+                                sx={{
+                                    fontSize: 17,
+                                    color: NAVY,
+                                    transition: "color 0.2s ease",
+                                }}
+                            >
+                                {item.label}
+                            </Typography>
+                        </Stack>
+                    );
+                })}
+            </Box>
+        </Box>
+    );
+}
+
+const CAREER_MENU = {
+    title: "CẨM NANG NGHỀ NGHIỆP",
+
+    items: [
+        {
+            label: "Bí quyết tìm việc",
+            icon: WorkTwoToneIcon,
+        },
+        {
+            label: "Kỹ năng viết CV",
+            icon: MenuBookTwoToneIcon,
+        },
+        {
+            label: "Kinh nghiệm phỏng vấn",
+            icon: RecordVoiceOverTwoToneIcon,
+        },
+        {
+            label: "Định hướng nghề nghiệp",
+            icon: SchoolTwoToneIcon,
+        },
+        {
+            label: "Phát triển sự nghiệp",
+            icon: TrendingUpTwoToneIcon,
+        },
+        {
+            label: "Mẹo nghề nghiệp",
+            icon: TipsAndUpdatesTwoToneIcon,
+        },
+    ],
+};
+
+function CareerMegaMenu() {
+    return (
+        <Box
+            sx={{
+                position: "absolute",
+                width: "80%",
+                top: "100%",
+                left: "10%",
+                bgcolor: "#fff",
+                borderTop: "1px solid #EAECF0",
+                boxShadow: "0 16px 32px rgba(16,24,40,0.12)",
+                px: {xs: 2, sm: 3, md: 5, lg: 7},
+                py: 4,
+                zIndex: 20,
+            }}
+        >
+            <Typography
+                sx={{
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: "#98A2B3",
+                    mb: 2,
+                    letterSpacing: 0.5,
+                }}
+            >
+                {CAREER_MENU.title}
+            </Typography>
+
+            <Box
+                sx={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    columnGap: 6,
+                    rowGap: 1,
+                    maxWidth: 750,
+                }}
+            >
+                {CAREER_MENU.items.map((item) => {
+                    const Icon = item.icon;
+
+                    return (
+                        <Stack
+                            key={item.label}
+                            direction="row"
+                            alignItems="center"
+                            spacing={1.5}
+                            sx={{
+                                px: 1,
+                                py: 1.2,
+                                borderRadius: 2,
+                                cursor: "pointer",
+
+                                "&:hover": {
+                                    bgcolor: "#F2FBF6",
+
+                                    "& .career-menu-icon": {
+                                        color: GREEN,
+                                        transform: "scale(1.08)",
+                                    },
+
+                                    "& .career-menu-text": {
+                                        color: GREEN,
+                                    },
+                                },
+                            }}
+                        >
+                            <Icon
+                                className="career-menu-icon"
+                                sx={{
+                                    fontSize: 26,
+                                    color: "#667085",
+                                    transition: "all 0.2s ease",
+                                }}
+                            />
+
+                            <Typography
+                                className="career-menu-text"
+                                sx={{
+                                    fontSize: 17,
+                                    color: NAVY,
+                                    transition: "color 0.2s ease",
+                                }}
+                            >
+                                {item.label}
+                            </Typography>
+                        </Stack>
+                    );
+                })}
+            </Box>
+        </Box>
+    );
+}
+
 // ---- Header / Navbar ----
 function Header() {
     const theme = useTheme();
@@ -355,11 +1012,27 @@ function Header() {
                 {isMdUp && (
                     <Stack direction="row" alignItems="center" spacing={8}>
                         {navLinks.map((label) => {
-                            const isActive = openMenu === "jobs" && label === "Việc làm";
+                            const isActive =
+                                (openMenu === "jobs" && label === "Việc làm") ||
+                                (openMenu === "cv" && label === "Tạo CV") ||
+                                (openMenu === "tools" && label === "Công cụ") ||
+                                (openMenu === "career" && label === "Cẩm nang nghề nghiệp");
                             return (
                                 <Box
                                     key={label}
-                                    onMouseEnter={() => setOpenMenu(label === "Việc làm" ? "jobs" : null)}
+                                    onMouseEnter={() => {
+                                        if (label === "Việc làm") {
+                                            setOpenMenu("jobs");
+                                        } else if (label === "Tạo CV") {
+                                            setOpenMenu("cv");
+                                        } else if (label === "Công cụ") {
+                                            setOpenMenu("tools");
+                                        } else if (label === "Cẩm nang nghề nghiệp") {
+                                            setOpenMenu("career");
+                                        } else {
+                                            setOpenMenu(null);
+                                        }
+                                    }}
                                     sx={{
                                         position: "relative",
                                         "&:hover .nav-label": {color: GREEN},
@@ -398,6 +1071,12 @@ function Header() {
             </Stack>
 
             {openMenu === "jobs" && <JobMegaMenu/>}
+
+            {openMenu === "cv" && <CvMegaMenu/>}
+
+            {openMenu === "tools" && <ToolMegaMenu/>}
+
+            {openMenu === "career" && <CareerMegaMenu/>}
 
             {isMdUp ? (
                 <Stack direction="row" spacing={2} alignItems="center">
@@ -451,12 +1130,403 @@ function Header() {
     );
 }
 
-// ---- Hero: tiêu đề + thanh tìm kiếm ----
+// ---- Hero: tiêu đề + thanh tìm kiếm ----eroS
+const CAREER_CATEGORIES = {
+    groups: [
+        {
+            label: "Kinh doanh / Bán hàng",
+            icon: BusinessCenterTwoToneIcon,
+        },
+        {
+            label: "Marketing / Truyền thông",
+            icon: CampaignTwoToneIcon,
+        },
+        {
+            label: "Công nghệ thông tin",
+            icon: CodeTwoToneIcon,
+        },
+        {
+            label: "Tài chính / Kế toán",
+            icon: AccountBalanceTwoToneIcon,
+        },
+        {
+            label: "Kỹ thuật / Xây dựng",
+            icon: EngineeringTwoToneIcon,
+        },
+        {
+            label: "Nhân sự / Hành chính",
+            icon: PeopleAltTwoToneIcon,
+        },
+    ],
+
+    jobs: [
+        "Nhân viên kinh doanh",
+        "Marketing",
+        "Lập trình viên",
+        "Kế toán",
+        "Nhân viên nhân sự",
+        "Kỹ sư xây dựng",
+        "Chăm sóc khách hàng",
+        "Thiết kế đồ họa",
+        "Nhân viên văn phòng",
+        "Nhân viên ngân hàng",
+    ],
+
+    positions: [
+        "Sales Executive",
+        "Marketing Executive",
+        "Frontend Developer",
+        "Backend Developer",
+        "Fullstack Developer",
+        "UI/UX Designer",
+        "Accountant",
+        "HR Specialist",
+        "Project Manager",
+        "Business Analyst",
+    ],
+};
+
+function CareerCategoryMenu() {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <Box sx={{position: "relative", maxWidth: 1000, mx: "auto"}}>
+
+            {/* Thanh mở menu */}
+            <Box
+                onClick={() => setOpen(!open)}
+                sx={{
+                    bgcolor: "#fff",
+                    borderRadius: 3,
+                    px: 2.5,
+                    py: 1.5,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    boxShadow: "0 4px 12px rgba(16,24,40,0.08)",
+                    mb: 1.5,
+
+                    "&:hover": {
+                        boxShadow: "0 6px 18px rgba(16,24,40,0.12)",
+                    },
+                }}
+            >
+                <Stack direction="row" spacing={1.2} alignItems="center">
+                    <WorkOutlineTwoToneIcon
+                        sx={{
+                            color: GREEN,
+                            fontSize: 25,
+                        }}
+                    />
+
+                    <Typography
+                        sx={{
+                            fontSize: 16,
+                            fontWeight: 700,
+                            color: NAVY,
+                        }}
+                    >
+                        Danh mục nghề nghiệp
+                    </Typography>
+                </Stack>
+
+                <KeyboardArrowDownIcon
+                    sx={{
+                        color: "#667085",
+                        transform: open ? "rotate(180deg)" : "rotate(0deg)",
+                        transition: "transform 0.2s ease",
+                    }}
+                />
+            </Box>
+
+            {/* Mega menu */}
+            {open && (
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: "calc(100% - 8px)",
+                        left: 0,
+                        right: 0,
+                        bgcolor: "#fff",
+                        borderRadius: 3,
+                        boxShadow: "0 16px 32px rgba(16,24,40,0.16)",
+                        p: {xs: 2, md: 3},
+                        zIndex: 30,
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: {
+                                xs: "1fr",
+                                md: "1fr 1fr 1fr",
+                            },
+                            gap: {xs: 3, md: 4},
+                        }}
+                    >
+
+                        {/* =====================
+                            NHÓM NGHỀ
+                        ====================== */}
+                        <Box>
+                            <Typography
+                                sx={{
+                                    fontSize: 14,
+                                    fontWeight: 800,
+                                    color: "#98A2B3",
+                                    mb: 1.5,
+                                    letterSpacing: 0.5,
+                                }}
+                            >
+                                NHÓM NGHỀ
+                            </Typography>
+
+                            <Stack spacing={0.5}>
+                                {CAREER_CATEGORIES.groups.map((item) => {
+                                    const Icon = item.icon;
+
+                                    return (
+                                        <Stack
+                                            key={item.label}
+                                            direction="row"
+                                            alignItems="center"
+                                            spacing={1.2}
+                                            sx={{
+                                                px: 1,
+                                                py: 1,
+                                                borderRadius: 2,
+                                                cursor: "pointer",
+
+                                                "&:hover": {
+                                                    bgcolor: "#F2FBF6",
+
+                                                    "& .category-icon": {
+                                                        color: GREEN,
+                                                        transform: "scale(1.08)",
+                                                    },
+
+                                                    "& .category-text": {
+                                                        color: GREEN,
+                                                    },
+                                                },
+                                            }}
+                                        >
+                                            <Icon
+                                                className="category-icon"
+                                                sx={{
+                                                    fontSize: 23,
+                                                    color: "#667085",
+                                                    transition: "all 0.2s ease",
+                                                }}
+                                            />
+
+                                            <Typography
+                                                className="category-text"
+                                                sx={{
+                                                    fontSize: 14.5,
+                                                    color: NAVY,
+                                                    transition: "color 0.2s ease",
+                                                }}
+                                            >
+                                                {item.label}
+                                            </Typography>
+                                        </Stack>
+                                    );
+                                })}
+                            </Stack>
+                        </Box>
+
+
+                        {/* =====================
+                            NGHỀ
+                        ====================== */}
+                        <Box>
+                            <Typography
+                                sx={{
+                                    fontSize: 14,
+                                    fontWeight: 800,
+                                    color: "#98A2B3",
+                                    mb: 1.5,
+                                    letterSpacing: 0.5,
+                                }}
+                            >
+                                NGHỀ
+                            </Typography>
+
+                            <Stack spacing={0.3}>
+                                {CAREER_CATEGORIES.jobs.map((job) => (
+                                    <Typography
+                                        key={job}
+                                        sx={{
+                                            px: 1,
+                                            py: 0.8,
+                                            borderRadius: 1.5,
+                                            fontSize: 14.5,
+                                            color: NAVY,
+                                            cursor: "pointer",
+
+                                            "&:hover": {
+                                                bgcolor: "#F2FBF6",
+                                                color: GREEN,
+                                            },
+                                        }}
+                                    >
+                                        {job}
+                                    </Typography>
+                                ))}
+                            </Stack>
+                        </Box>
+
+
+                        {/* =====================
+                            VỊ TRÍ CHUYÊN MÔN
+                        ====================== */}
+                        <Box>
+                            <Typography
+                                sx={{
+                                    fontSize: 14,
+                                    fontWeight: 800,
+                                    color: "#98A2B3",
+                                    mb: 1.5,
+                                    letterSpacing: 0.5,
+                                }}
+                            >
+                                VỊ TRÍ CHUYÊN MÔN
+                            </Typography>
+
+                            <Stack spacing={0.3}>
+                                {CAREER_CATEGORIES.positions.map((position) => (
+                                    <Typography
+                                        key={position}
+                                        sx={{
+                                            px: 1,
+                                            py: 0.8,
+                                            borderRadius: 1.5,
+                                            fontSize: 14.5,
+                                            color: NAVY,
+                                            cursor: "pointer",
+
+                                            "&:hover": {
+                                                bgcolor: "#F2FBF6",
+                                                color: GREEN,
+                                            },
+                                        }}
+                                    >
+                                        {position}
+                                    </Typography>
+                                ))}
+                            </Stack>
+                        </Box>
+
+                    </Box>
+                </Box>
+            )}
+        </Box>
+    );
+}
+
 function HeroSearch() {
+    const [categoryOpen, setCategoryOpen] = useState(false);
+    const categoryRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                categoryRef.current &&
+                !categoryRef.current.contains(event.target)
+            ) {
+                setCategoryOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
+        };
+    }, []);
+
+    const careerGroups = [
+        {
+            title: "Kinh doanh / Bán hàng",
+            jobs: [
+                "Nhân viên kinh doanh",
+                "Sales",
+                "Telesales",
+                "Business Development",
+            ],
+        },
+        {
+            title: "Marketing / Truyền thông",
+            jobs: [
+                "Marketing",
+                "Digital Marketing",
+                "Content Marketing",
+                "PR / Truyền thông",
+            ],
+        },
+        {
+            title: "Công nghệ thông tin",
+            jobs: [
+                "Lập trình viên",
+                "Frontend Developer",
+                "Backend Developer",
+                "Fullstack Developer",
+            ],
+        },
+        {
+            title: "Tài chính / Kế toán",
+            jobs: [
+                "Kế toán",
+                "Kiểm toán",
+                "Tài chính",
+                "Ngân hàng",
+            ],
+        },
+        {
+            title: "Nhân sự / Hành chính",
+            jobs: [
+                "Nhân viên nhân sự",
+                "HR Specialist",
+                "Recruiter",
+                "Hành chính",
+            ],
+        },
+        {
+            title: "Kỹ thuật / Xây dựng",
+            jobs: [
+                "Kỹ sư xây dựng",
+                "Kỹ sư cơ khí",
+                "Kỹ thuật điện",
+                "Giám sát công trình",
+            ],
+        },
+    ];
+
+    const positions = [
+        "Intern",
+        "Junior",
+        "Middle",
+        "Senior",
+        "Team Leader",
+        "Manager",
+        "Director",
+        "Freelancer",
+    ];
+
     return (
         <Box
             sx={{
-                background: `linear-gradient(120deg, #0B2E1D 0%, #0F4A2C 55%, ${GREEN_DARK} 100%)`,
+                background: `linear-gradient(
+                    120deg,
+                    #0B2E1D 0%,
+                    #0F4A2C 55%,
+                    ${GREEN_DARK} 100%
+                )`,
                 px: {xs: 2, sm: 4, md: 8},
                 py: {xs: 4, sm: 5, md: 6},
             }}
@@ -474,62 +1544,369 @@ function HeroSearch() {
                 TopCV - Tạo CV, Tìm việc làm, Tuyển dụng hiệu quả
             </Typography>
 
-            <Stack
-                direction={{xs: "column", md: "row"}}
-                spacing={{xs: 1.5, md: 0}}
+            {/* SEARCH WRAPPER */}
+            <Box
+                ref={categoryRef}
                 sx={{
-                    bgcolor: "#fff",
-                    borderRadius: {xs: 3, md: 6},
-                    p: {xs: 1.5, md: 1},
                     maxWidth: 1000,
                     mx: "auto",
+                    position: "relative",
                 }}
             >
-                <TextField
-                    placeholder="Vị trí tuyển dụng, tên công ty"
-                    fullWidth
-                    variant="standard"
-                    InputProps={{
-                        disableUnderline: true,
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <SearchIcon sx={{color: "#98A2B3", ml: 1}}/>
-                            </InputAdornment>
-                        ),
-                    }}
-                    sx={{px: 1, py: 0.5}}
-                />
-                <Divider orientation="vertical" flexItem sx={{display: {xs: "none", md: "block"}, my: 1}}/>
-                <TextField
-                    placeholder="Địa điểm"
-                    variant="standard"
-                    InputProps={{
-                        disableUnderline: true,
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <PlaceOutlinedIcon sx={{color: "#98A2B3", ml: 1}}/>
-                            </InputAdornment>
-                        ),
-                    }}
-                    sx={{px: 1, py: 0.5, minWidth: {md: 220}}}
-                />
-                <Button
-                    variant="contained"
-                    startIcon={<SearchIcon/>}
+
+                {/* SEARCH BAR */}
+                <Stack
+                    direction={{xs: "column", md: "row"}}
+                    spacing={{xs: 1.5, md: 0}}
                     sx={{
-                        bgcolor: GREEN,
-                        textTransform: "none",
-                        fontWeight: 700,
-                        borderRadius: {xs: 3, md: 5},
-                        px: 4,
-                        py: 1.3,
-                        boxShadow: "none",
-                        "&:hover": {bgcolor: GREEN_DARK, boxShadow: "none"},
+                        bgcolor: "#fff",
+                        borderRadius: categoryOpen
+                            ? "24px 24px 0 0"
+                            : {xs: 3, md: 6},
+                        p: {xs: 1.5, md: 1},
+                        position: "relative",
+                        zIndex: 5,
                     }}
                 >
-                    Tìm kiếm
-                </Button>
-            </Stack>
+
+                    {/* =========================
+                        DANH MỤC NGHỀ NGHIỆP
+                    ========================== */}
+                    <Box
+                        onClick={() => setCategoryOpen(!categoryOpen)}
+                        sx={{
+                            minWidth: {md: 220},
+                            px: 1.5,
+                            py: 1,
+
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+
+                            cursor: "pointer",
+
+                            borderRadius: 3,
+
+                            "&:hover": {
+                                bgcolor: "#F9FAFB",
+                            },
+                        }}
+                    >
+                        <Stack
+                            direction="row"
+                            alignItems="center"
+                            spacing={1}
+                        >
+                            <WorkOutlineTwoToneIcon
+                                sx={{
+                                    color: GREEN,
+                                    fontSize: 24,
+                                }}
+                            />
+
+                            <Typography
+                                sx={{
+                                    fontSize: 14,
+                                    fontWeight: 700,
+                                    color: NAVY,
+                                    whiteSpace: "nowrap",
+                                }}
+                            >
+                                Danh mục nghề nghiệp
+                            </Typography>
+                        </Stack>
+
+                        <KeyboardArrowDownIcon
+                            sx={{
+                                fontSize: 20,
+                                color: "#98A2B3",
+                                transform: categoryOpen
+                                    ? "rotate(180deg)"
+                                    : "rotate(0deg)",
+                                transition:
+                                    "transform 0.2s ease",
+                            }}
+                        />
+                    </Box>
+
+                    <Divider
+                        orientation="vertical"
+                        flexItem
+                        sx={{
+                            display: {
+                                xs: "none",
+                                md: "block",
+                            },
+                            my: 1,
+                        }}
+                    />
+
+                    {/* =========================
+                        Ô TÌM KIẾM
+                    ========================== */}
+                    <TextField
+                        placeholder="Vị trí tuyển dụng, tên công ty"
+                        fullWidth
+                        variant="standard"
+                        InputProps={{
+                            disableUnderline: true,
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon
+                                        sx={{
+                                            color: "#98A2B3",
+                                            ml: 1,
+                                        }}
+                                    />
+                                </InputAdornment>
+                            ),
+                        }}
+                        sx={{
+                            px: 1,
+                            py: 0.5,
+                        }}
+                    />
+
+                    <Divider
+                        orientation="vertical"
+                        flexItem
+                        sx={{
+                            display: {
+                                xs: "none",
+                                md: "block",
+                            },
+                            my: 1,
+                        }}
+                    />
+
+                    {/* =========================
+                        ĐỊA ĐIỂM
+                    ========================== */}
+                    <TextField
+                        placeholder="Địa điểm"
+                        variant="standard"
+                        InputProps={{
+                            disableUnderline: true,
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <PlaceOutlinedIcon
+                                        sx={{
+                                            color: "#98A2B3",
+                                            ml: 1,
+                                        }}
+                                    />
+                                </InputAdornment>
+                            ),
+                        }}
+                        sx={{
+                            px: 1,
+                            py: 0.5,
+                            minWidth: {md: 180},
+                        }}
+                    />
+
+                    {/* =========================
+                        SEARCH BUTTON
+                    ========================== */}
+                    <Button
+                        variant="contained"
+                        startIcon={<SearchIcon/>}
+                        sx={{
+                            bgcolor: GREEN,
+                            textTransform: "none",
+                            fontWeight: 700,
+                            borderRadius: {xs: 3, md: 5},
+                            px: 4,
+                            py: 1.3,
+                            boxShadow: "none",
+
+                            whiteSpace: "nowrap",
+                            minWidth: "fit-content",
+
+                            "&:hover": {
+                                bgcolor: GREEN_DARK,
+                                boxShadow: "none",
+                            },
+                        }}
+                    >
+                        Tìm kiếm
+                    </Button>
+                </Stack>
+
+
+                {/* =====================================
+                    DROPDOWN FULL WIDTH
+                ====================================== */}
+                {categoryOpen && (
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: "100%",
+                            left: 0,
+                            right: 0,
+
+                            bgcolor: "#fff",
+
+                            borderRadius: "0 0 24px 24px",
+
+                            boxShadow:
+                                "0 16px 32px rgba(16,24,40,0.16)",
+
+                            px: {xs: 2, md: 4},
+                            py: {xs: 2, md: 3},
+
+                            zIndex: 10,
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                display: "grid",
+                                gridTemplateColumns: {
+                                    xs: "1fr",
+                                    md: "1.1fr 1.2fr 0.8fr",
+                                },
+                                gap: {xs: 3, md: 5},
+                            }}
+                        >
+
+                            {/* NHÓM NGHỀ */}
+                            <Box>
+                                <Typography
+                                    sx={{
+                                        fontSize: 13,
+                                        fontWeight: 800,
+                                        color: "#98A2B3",
+                                        mb: 1.5,
+                                        letterSpacing: 0.5,
+                                    }}
+                                >
+                                    NHÓM NGHỀ
+                                </Typography>
+
+                                <Stack spacing={0.4}>
+                                    {careerGroups.map((group) => (
+                                        <Typography
+                                            key={group.title}
+                                            sx={{
+                                                px: 1,
+                                                py: 0.8,
+                                                borderRadius: 1.5,
+                                                fontSize: 14,
+                                                fontWeight: 500,
+                                                color: NAVY,
+                                                cursor: "pointer",
+
+                                                "&:hover": {
+                                                    bgcolor: "#F2FBF6",
+                                                    color: GREEN,
+                                                },
+                                            }}
+                                        >
+                                            {group.title}
+                                        </Typography>
+                                    ))}
+                                </Stack>
+                            </Box>
+
+
+                            {/* NGHỀ */}
+                            <Box>
+                                <Typography
+                                    sx={{
+                                        fontSize: 13,
+                                        fontWeight: 800,
+                                        color: "#98A2B3",
+                                        mb: 1.5,
+                                        letterSpacing: 0.5,
+                                    }}
+                                >
+                                    NGHỀ
+                                </Typography>
+
+                                <Box
+                                    sx={{
+                                        display: "grid",
+                                        gridTemplateColumns:
+                                            "1fr 1fr",
+                                        columnGap: 2,
+                                    }}
+                                >
+                                    {careerGroups
+                                        .flatMap(
+                                            (group) =>
+                                                group.jobs
+                                        )
+                                        .slice(0, 12)
+                                        .map((job) => (
+                                            <Typography
+                                                key={job}
+                                                sx={{
+                                                    px: 1,
+                                                    py: 0.8,
+                                                    borderRadius: 1.5,
+                                                    fontSize: 14,
+                                                    color: NAVY,
+                                                    cursor: "pointer",
+
+                                                    "&:hover": {
+                                                        bgcolor:
+                                                            "#F2FBF6",
+                                                        color: GREEN,
+                                                    },
+                                                }}
+                                            >
+                                                {job}
+                                            </Typography>
+                                        ))}
+                                </Box>
+                            </Box>
+
+
+                            {/* VỊ TRÍ CHUYÊN MÔN */}
+                            <Box>
+                                <Typography
+                                    sx={{
+                                        fontSize: 13,
+                                        fontWeight: 800,
+                                        color: "#98A2B3",
+                                        mb: 1.5,
+                                        letterSpacing: 0.5,
+                                    }}
+                                >
+                                    VỊ TRÍ CHUYÊN MÔN
+                                </Typography>
+
+                                <Stack spacing={0.3}>
+                                    {positions.map(
+                                        (position) => (
+                                            <Typography
+                                                key={position}
+                                                sx={{
+                                                    px: 1,
+                                                    py: 0.8,
+                                                    borderRadius: 1.5,
+                                                    fontSize: 14,
+                                                    color: NAVY,
+                                                    cursor: "pointer",
+
+                                                    "&:hover": {
+                                                        bgcolor:
+                                                            "#F2FBF6",
+                                                        color: GREEN,
+                                                    },
+                                                }}
+                                            >
+                                                {position}
+                                            </Typography>
+                                        )
+                                    )}
+                                </Stack>
+                            </Box>
+
+                        </Box>
+                    </Box>
+                )}
+            </Box>
         </Box>
     );
 }
