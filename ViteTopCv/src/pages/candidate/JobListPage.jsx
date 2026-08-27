@@ -1538,10 +1538,21 @@ function HeroSearch() {
                     color: GREEN,
                     textAlign: "center",
                     fontSize: {xs: 20, sm: 26, md: 32},
+                }}
+            >
+                Tìm việc làm nhanh 24H, việc làm mới nhất trên toàn quốc
+            </Typography>
+            <Typography
+                sx={{
+                    fontFamily: "Sora, sans-serif",
+                    fontWeight: 500,
+                    color: "white",
+                    textAlign: "center",
+                    fontSize: {xs: 10, sm: 12, md: 18},
                     mb: {xs: 3, md: 4},
                 }}
             >
-                TopCV - Tạo CV, Tìm việc làm, Tuyển dụng hiệu quả
+                Tiếp cận 60.000+ tin tuyển dụng việc làm mỗi ngày từ hàng nghìn doanh nghiệp uy tín tại Việt Nam
             </Typography>
 
             {/* SEARCH WRAPPER */}
