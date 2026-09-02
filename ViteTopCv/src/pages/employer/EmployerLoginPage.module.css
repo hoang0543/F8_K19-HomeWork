@@ -1,0 +1,465 @@
+:root {
+  --green: #00b14f;
+  --green-dark: #008c40;
+
+  --navy: #18191c;
+
+  --panel-bg: #0e2233;
+
+  --text-secondary: #475467;
+  --text-light: #98a2b3;
+
+  --border: #d0d5dd;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+  font-family: "Sora", sans-serif !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: -0.5px !important;
+
+  line-height: 1 !important;
+}
+
+.logoTop {
+  color: var(--navy);
+}
+
+.logoTopLight {
+  color: #ffffff;
+}
+
+.logoCv {
+  color: var(--green);
+}
+
+.logoDot {
+  color: var(--green);
+
+  vertical-align: super;
+
+  margin-left: 2px;
+}
+
+/* =========================
+   LEFT PANEL
+========================= */
+
+.leftPanel {
+  width: 66.6667%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ffffff;
+
+  padding: 48px 96px;
+
+  box-sizing: border-box;
+}
+
+.formContainer {
+  width: 100%;
+
+  max-width: 460px;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.title {
+  font-family: "Sora", sans-serif !important;
+
+  font-weight: 800 !important;
+
+  color: var(--green);
+
+  font-size: 26px !important;
+
+  line-height: 1.35 !important;
+
+  margin-top: 32px !important;
+  margin-bottom: 8px !important;
+}
+
+.description {
+  font-size: 14px !important;
+
+  line-height: 1.7 !important;
+
+  color: var(--text-secondary);
+
+  margin-bottom: 24px !important;
+}
+
+/* =========================
+   GOOGLE BUTTON
+========================= */
+
+.googleButton {
+  background-color: #4285f4 !important;
+
+  color: #ffffff !important;
+
+  text-transform: none !important;
+
+  font-weight: 600 !important;
+
+  border-radius: 8px !important;
+
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+
+  margin-bottom: 24px !important;
+
+  box-shadow: none !important;
+}
+
+.googleButton:hover {
+  background-color: #3367d6 !important;
+
+  box-shadow: none !important;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.formLabel {
+  font-weight: 600 !important;
+
+  font-size: 14px !important;
+
+  color: var(--navy);
+
+  margin-bottom: 8px !important;
+}
+
+.emailIcon {
+  color: var(--green);
+
+  font-size: 20px !important;
+}
+
+.passwordIcon {
+  color: var(--text-light);
+
+  font-size: 20px !important;
+}
+
+/* =========================
+   TEXTFIELD
+========================= */
+
+.input :global(.MuiOutlinedInput-root) {
+  border-radius: 8px;
+}
+
+.input :global(.MuiOutlinedInput-notchedOutline) {
+  border-color: var(--border);
+}
+
+.input
+  :global(.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline) {
+  border-color: var(--green);
+}
+
+.input
+  :global(
+    .MuiOutlinedInput-root.Mui-focused
+      .MuiOutlinedInput-notchedOutline
+  ) {
+  border-color: var(--green);
+
+  border-width: 1px;
+}
+
+/* =========================
+   FORGOT PASSWORD
+========================= */
+
+.forgotPasswordWrapper {
+  margin-top: 8px;
+}
+
+.forgotPassword {
+  font-size: 13px !important;
+
+  color: var(--green) !important;
+
+  font-weight: 600 !important;
+}
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.loginButton {
+  background-color: var(--green) !important;
+
+  color: #ffffff !important;
+
+  text-transform: none !important;
+
+  font-weight: 700 !important;
+
+  font-size: 15px !important;
+
+  padding-top: 11px !important;
+  padding-bottom: 11px !important;
+
+  border-radius: 8px !important;
+
+  box-shadow: none !important;
+}
+
+.loginButton:hover {
+  background-color: var(--green-dark) !important;
+
+  box-shadow: none !important;
+}
+
+/* =========================
+   REGISTER
+========================= */
+
+.registerText {
+  margin-top: 24px !important;
+
+  font-size: 14px !important;
+
+  color: #344054;
+
+  text-align: center;
+}
+
+.registerLink {
+  color: var(--green) !important;
+
+  font-weight: 700 !important;
+}
+
+/* =========================
+   CANDIDATE LOGIN
+========================= */
+
+.candidateText {
+  margin-top: 16px !important;
+
+  font-size: 13px !important;
+
+  color: var(--text-light);
+
+  text-align: center;
+}
+
+.candidateLink {
+  font-weight: 600 !important;
+}
+
+/* =========================
+   RIGHT PANEL
+========================= */
+
+.rightPanel {
+  width: 33.3333%;
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 40px;
+
+  box-sizing: border-box;
+
+  background-color: var(--panel-bg);
+}
+
+/* =========================
+   RIGHT TITLE
+========================= */
+
+.rightTitle {
+  font-family: "Sora", sans-serif !important;
+
+  font-weight: 800 !important;
+
+  color: #ffffff;
+
+  font-size: 28px !important;
+
+  line-height: 1.4 !important;
+
+  max-width: 420px;
+}
+
+.highlight {
+  color: var(--green);
+}
+
+/* =========================
+   ANALYTICS
+========================= */
+
+.analytics {
+  width: 100%;
+
+  max-width: 420px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.analyticsSvg {
+  display: block;
+
+  height: auto;
+}
+
+.analyticsGreen {
+  fill: var(--green);
+}
+
+.barLight {
+  opacity: 0.6;
+}
+
+.barMedium {
+  opacity: 0.8;
+}
+
+/* =========================
+   RIGHT BOTTOM
+========================= */
+
+.rightBottom {
+  width: 100%;
+}
+
+.sliderDot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.sliderDotActive {
+  background-color: var(--green);
+}
+
+.slogan {
+  font-size: 12px !important;
+
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================
+   COPYRIGHT
+========================= */
+
+.mobileCopyright {
+  display: none;
+
+  margin-top: 32px !important;
+
+  font-size: 12px !important;
+
+  color: var(--green);
+
+  text-align: center;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1199px) {
+  .leftPanel {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+
+  .rightPanel {
+    padding: 32px;
+  }
+
+  .rightTitle {
+    font-size: 22px !important;
+  }
+}
+
+/* =========================
+   MOBILE / TABLET NHỎ
+========================= */
+
+@media (max-width: 899px) {
+  .page {
+    flex-direction: column;
+  }
+
+  .leftPanel {
+    width: 100%;
+
+    padding: 48px;
+
+    min-height: 100vh;
+  }
+
+  .rightPanel {
+    display: none;
+  }
+
+  .mobileCopyright {
+    display: block;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 599px) {
+  .leftPanel {
+    padding: 40px 24px;
+  }
+
+  .title {
+    font-size: 22px !important;
+  }
+}

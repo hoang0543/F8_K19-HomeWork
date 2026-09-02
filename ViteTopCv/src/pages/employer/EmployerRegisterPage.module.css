@@ -1,0 +1,316 @@
+:root {
+  --green: #00b14f;
+  --green-dark: #008c40;
+  --navy: #18191c;
+  --text: #475467;
+  --muted: #98a2b3;
+  --border: #d0d5dd;
+}
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 48px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  background: #f7f8fa;
+
+  font-family: "Inter", sans-serif;
+}
+
+.card {
+  width: 100%;
+  max-width: 900px;
+
+  padding: 42px 48px !important;
+
+  border-radius: 24px !important;
+
+  box-sizing: border-box;
+
+  background: #ffffff !important;
+
+  box-shadow:
+    0 4px 24px rgba(16, 24, 40, 0.07) !important;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+  font-family: "Sora", sans-serif !important;
+  font-weight: 800 !important;
+
+  letter-spacing: -0.5px;
+}
+
+.logoTop {
+  color: var(--navy);
+}
+
+.logoCv,
+.logoDot {
+  color: var(--green);
+}
+
+.logoDot {
+  margin-left: 2px;
+  vertical-align: super;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  margin-bottom: 34px;
+}
+
+.employerBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 10px;
+
+  padding: 6px 12px;
+
+  border-radius: 20px;
+
+  color: var(--green);
+
+  background: #eafaf1;
+}
+
+.employerBadge p {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.title {
+  margin-top: 8px !important;
+
+  color: var(--navy);
+
+  font-family: "Sora", sans-serif !important;
+
+  font-size: 22px !important;
+  font-weight: 700 !important;
+
+  text-align: center;
+}
+
+.description {
+  max-width: 520px;
+
+  color: #667085;
+
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+
+  text-align: center;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.sectionTitle {
+  color: var(--navy);
+
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+.sectionDivider {
+  margin: 10px 0 20px !important;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.formGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+/* =========================
+   INPUT
+========================= */
+
+.formLabel {
+  margin-bottom: 8px !important;
+
+  color: var(--navy);
+
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+}
+
+.input :global(.MuiOutlinedInput-root) {
+  min-height: 50px;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+}
+
+.input
+  :global(.MuiOutlinedInput-root:hover fieldset) {
+  border-color: #98a2b3;
+}
+
+.input
+  :global(.MuiOutlinedInput-root.Mui-focused fieldset) {
+  border-color: var(--green);
+
+  border-width: 1px;
+}
+
+.input :global(.MuiOutlinedInput-input) {
+  font-size: 14px;
+}
+
+.input
+  :global(.MuiOutlinedInput-input::placeholder) {
+  color: #98a2b3;
+
+  opacity: 1;
+}
+
+.input :global(.MuiFormHelperText-root) {
+  margin-left: 2px;
+
+  font-size: 12px;
+}
+
+/* =========================
+   REGISTER
+========================= */
+
+.registerButton {
+  min-height: 52px !important;
+
+  background: var(--green) !important;
+
+  border-radius: 10px !important;
+
+  color: #ffffff !important;
+
+  font-size: 15px !important;
+  font-weight: 700 !important;
+
+  text-transform: none !important;
+
+  box-shadow: none !important;
+}
+
+.registerButton:hover {
+  background: var(--green-dark) !important;
+
+  box-shadow: none !important;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.loginText {
+  margin-top: 28px !important;
+
+  color: var(--text);
+
+  font-size: 14px !important;
+
+  text-align: center;
+}
+
+.loginLink {
+  padding: 0 !important;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--green) !important;
+
+  font-family: inherit;
+
+  font-size: inherit !important;
+  font-weight: 700 !important;
+
+  cursor: pointer;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 899px) {
+  .page {
+    padding: 32px 20px;
+  }
+
+  .card {
+    padding: 34px 30px !important;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 599px) {
+  .page {
+    padding: 20px 14px;
+
+    align-items: flex-start;
+  }
+
+  .card {
+    padding: 26px 20px !important;
+
+    border-radius: 16px !important;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .fullWidth {
+    grid-column: auto;
+  }
+
+  .title {
+    font-size: 19px !important;
+  }
+
+  .description {
+    font-size: 12px !important;
+  }
+
+  .sectionTitle {
+    font-size: 15px !important;
+  }
+
+  .registerButton {
+    min-height: 48px !important;
+  }
+}
