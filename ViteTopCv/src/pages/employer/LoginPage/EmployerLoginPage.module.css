@@ -463,3 +463,13 @@
     font-size: 22px !important;
   }
 }
+
+.forgotPasswordWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rightBottom {
+  display: flex;
+  align-items: center;
+}

@@ -356,18 +356,6 @@ export const POSITIONS = [
   "Freelancer",
 ];
 
-/* =========================
-   CATEGORY
-========================= */
-
-export const CATEGORIES = [
-  "Kinh doanh/Bán hàng",
-  "Marketing/PR/Quảng cáo",
-  "Chăm sóc khách hàng",
-  "Nhân sự/Hành chính/Pháp chế",
-  "Công nghệ Thông tin",
-  "Lao động phổ thông",
-];
 
 export const JOBS = [
   {

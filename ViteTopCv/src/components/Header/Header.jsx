@@ -14,6 +14,7 @@ import {
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import {
     NAV_LINKS,
@@ -305,7 +306,7 @@ function CareerMegaMenu() {
    HEADER
 ========================= */
 
-export default function Header() {
+export default function Header({mode = "candidate", companyName = "",}) {
     const theme = useTheme();
 
     const isMdUp = useMediaQuery(
@@ -314,13 +315,25 @@ export default function Header() {
 
     const navigate = useNavigate();
 
-    const [openMenu, setOpenMenu] = useState(null);
+    const [openMenu, setOpenMenu] =
+        useState(null);
 
-    const handleCandidateLogin = () => {
-        navigate("/candidate/login");
+    const handleLogout = () => {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("user");
+        localStorage.removeItem("company_name");
+
+        navigate("/employer/login", {
+            replace: true,
+        });
     };
 
-    const handleEmployerLogin = () => {
+    const handleEmployerAction = () => {
+        if (mode === "employer") {
+            navigate("/employer/jobs/create");
+            return;
+        }
+
         navigate("/employer/login");
     };
 
@@ -400,31 +413,87 @@ export default function Header() {
 
             {/* RIGHT */}
 
+            {/* RIGHT */}
+
             {isMdUp ? (
                 <Stack
                     direction="row"
                     alignItems="center"
                     spacing={1.5}
                 >
-                    <Button
-                        variant="outlined"
-                        className={styles.registerButton}
-                        onClick={() => navigate("/candidate/register")}
-                    >
-                        Đăng ký
-                    </Button>
+                    {/* =====================
+            CANDIDATE MODE
+        ===================== */}
 
-                    <Button
-                        variant="contained"
-                        className={styles.loginButton}
-                        onClick={() => navigate("/candidate/login")}
-                    >
-                        Đăng nhập
-                    </Button>
+                    {mode === "candidate" && (
+                        <>
+                            <Button
+                                variant="outlined"
+                                className={styles.registerButton}
+                                onClick={() =>
+                                    navigate("/candidate/register")
+                                }
+                            >
+                                Đăng ký
+                            </Button>
+
+                            <Button
+                                variant="contained"
+                                className={styles.loginButton}
+                                onClick={() =>
+                                    navigate("/candidate/login")
+                                }
+                            >
+                                Đăng nhập
+                            </Button>
+                        </>
+                    )}
+
+                    {/* =====================
+            EMPLOYER MODE
+        ===================== */}
+
+                    {mode === "employer" && (
+                        <>
+                            <Box className={styles.companyAccount}>
+                                <Box className={styles.companyAvatar}>
+                                    {companyName
+                                        ? companyName.charAt(0).toUpperCase()
+                                        : "C"}
+                                </Box>
+
+                                <Box className={styles.companyInfo}>
+                                    <Typography className={styles.companyLabel}>
+                                        Nhà tuyển dụng
+                                    </Typography>
+
+                                    <Typography
+                                        className={styles.companyNameHeader}
+                                        title={companyName || ""}
+                                    >
+                                        {companyName || "Doanh nghiệp"}
+                                    </Typography>
+                                </Box>
+                            </Box>
+
+                            <Button
+                                className={styles.logoutButton}
+                                startIcon={<LogoutIcon/>}
+                                onClick={handleLogout}
+                            >
+                                Đăng xuất
+                            </Button>
+                        </>
+                    )}
+
+                    {/* =====================
+            EMPLOYER BUTTON
+        ===================== */}
+
                     <Button
                         className={styles.employerButton}
                         startIcon={<ApartmentIcon/>}
-                        onClick={handleEmployerLogin}
+                        onClick={handleEmployerAction}
                     >
                         Đăng tuyển & tìm hồ sơ
                     </Button>
@@ -434,6 +503,7 @@ export default function Header() {
                     <MenuIcon/>
                 </IconButton>
             )}
+
         </Box>
     );
 }

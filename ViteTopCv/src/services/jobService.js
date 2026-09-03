@@ -17,3 +17,12 @@ export const getJobBySlug = async (slug) => {
 
   return response.data;
 };
+
+export const createJob = async (payload) => {
+  const response = await axiosClient.post(
+    "/employer/jobs",
+    payload
+  );
+
+  return response.data;
+};

@@ -1,0 +1,71 @@
+.page {
+    min-height: 100vh;
+    background: #f7f8fa;
+}
+
+.main {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.title {
+    color: #18191c;
+
+    font-size: 28px !important;
+    font-weight: 700 !important;
+}
+
+.description {
+    margin-top: 8px !important;
+    margin-bottom: 28px !important;
+
+    color: #667085;
+
+    font-size: 14px !important;
+}
+
+.companyCard {
+    max-width: 650px;
+
+    padding: 28px !important;
+
+    border-radius: 16px !important;
+
+    box-shadow:
+        0 2px 12px rgba(16, 24, 40, 0.06) !important;
+}
+
+.companyIcon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #eafaf1;
+
+    color: #00b14f;
+}
+
+.label {
+    color: #98a2b3;
+
+    font-size: 12px !important;
+}
+
+.value {
+    margin-top: 3px !important;
+
+    color: #18191c;
+
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}

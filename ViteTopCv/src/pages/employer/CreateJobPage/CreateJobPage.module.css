@@ -1,0 +1,317 @@
+:root {
+  --green: #00b14f;
+  --green-dark: #008c40;
+
+  --navy: #18191c;
+
+  --text: #475467;
+  --muted: #98a2b3;
+
+  --border: #eaecf0;
+
+  --background: #f7f8fa;
+}
+
+.page {
+  min-height: 100vh;
+
+  background: var(--background);
+
+  font-family: "Inter", sans-serif;
+}
+
+.main {
+  width: 100%;
+  max-width: 1080px;
+
+  margin: 0 auto;
+
+  padding: 40px 24px 64px;
+
+  box-sizing: border-box;
+}
+
+.pageHeader {
+  margin-bottom: 28px;
+}
+
+.pageTitle {
+  color: var(--navy);
+
+  font-family: "Sora", sans-serif !important;
+
+  font-size: 28px !important;
+  font-weight: 800 !important;
+}
+
+.pageDescription {
+  margin-top: 6px !important;
+
+  color: #667085;
+
+  font-size: 14px !important;
+}
+
+.card {
+  padding: 28px !important;
+
+  background: #ffffff !important;
+
+  border-radius: 16px !important;
+
+  box-shadow:
+    0 2px 12px rgba(16, 24, 40, 0.05) !important;
+}
+
+.sectionHeader {
+  color: var(--green);
+}
+
+.sectionHeader svg {
+  color: var(--green);
+}
+
+.sectionTitle {
+  color: var(--navy);
+
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.divider {
+  margin: 16px 0 22px !important;
+}
+
+.formGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+.locationGrid {
+  display: grid;
+
+  grid-template-columns:
+    180px
+    minmax(0, 1fr);
+
+  gap: 18px;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.label {
+  margin-bottom: 8px !important;
+
+  color: var(--navy);
+
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+}
+
+.input :global(.MuiOutlinedInput-root) {
+  min-height: 50px;
+
+  border-radius: 10px;
+}
+
+.input
+  :global(.MuiOutlinedInput-root.Mui-focused fieldset) {
+  border-color: var(--green);
+}
+
+.locationCard {
+  padding: 18px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+}
+
+.editor {
+  overflow: hidden;
+
+  border: 1px solid #d0d5dd;
+
+  border-radius: 10px;
+}
+
+.editor :global(.ck-editor__editable) {
+  min-height: 180px;
+
+  padding: 16px !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.editor
+  :global(.ck-editor__editable.ck-focused) {
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.editor :global(.ck-toolbar) {
+  border: 0 !important;
+
+  border-bottom: 1px solid #eaecf0 !important;
+}
+
+.errorText {
+  margin-top: 6px !important;
+
+  color: #d92d20;
+
+  font-size: 12px !important;
+}
+
+.cancelButton {
+  min-width: 120px !important;
+
+  border-color: #d0d5dd !important;
+
+  border-radius: 10px !important;
+
+  color: #344054 !important;
+
+  font-weight: 600 !important;
+
+  text-transform: none !important;
+}
+
+.submitButton {
+  min-width: 150px !important;
+
+  background: var(--green) !important;
+
+  border-radius: 10px !important;
+
+  font-weight: 700 !important;
+
+  text-transform: none !important;
+
+  box-shadow: none !important;
+}
+
+.submitButton:hover {
+  background: var(--green-dark) !important;
+
+  box-shadow: none !important;
+}
+
+@media (max-width: 899px) {
+  .main {
+    padding:
+      32px
+      20px
+      48px;
+  }
+
+  .card {
+    padding: 22px !important;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .fullWidth {
+    grid-column: auto;
+  }
+
+  .locationGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 599px) {
+  .main {
+    padding:
+      24px
+      14px
+      40px;
+  }
+
+  .pageTitle {
+    font-size: 22px !important;
+  }
+
+  .card {
+    padding: 18px !important;
+
+    border-radius: 12px !important;
+  }
+
+  .editor
+    :global(.ck-editor__editable) {
+    min-height: 150px;
+  }
+}
+
+/* =========================================================
+   WELCOME COMPANY
+========================================================= */
+
+.welcomeBox {
+  margin-bottom: 24px;
+
+  padding: 20px 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ecfdf3 0%,
+      #f6fef9 100%
+    );
+
+  border: 1px solid #d1fadf;
+  border-radius: 16px;
+
+  box-sizing: border-box;
+}
+
+.welcomeTitle {
+  color: #101828;
+
+  font-size: 21px !important;
+  font-weight: 700 !important;
+
+  line-height: 1.4 !important;
+}
+
+.companyName {
+  color: #00b14f;
+
+  font-weight: 800;
+}
+
+.welcomeDescription {
+  margin-top: 6px !important;
+
+  color: #667085;
+
+  font-size: 14px !important;
+
+  line-height: 1.6 !important;
+}
+
+@media (max-width: 599px) {
+  .welcomeBox {
+    padding: 16px;
+  }
+
+  .welcomeTitle {
+    font-size: 18px !important;
+  }
+
+  .welcomeDescription {
+    font-size: 13px !important;
+  }
+}

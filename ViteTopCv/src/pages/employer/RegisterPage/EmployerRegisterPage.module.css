@@ -314,3 +314,19 @@
     min-height: 48px !important;
   }
 }
+
+.serverError {
+  padding: 10px 12px;
+
+  background: #fef3f2;
+
+  border: 1px solid #fecdca;
+
+  border-radius: 8px;
+
+  color: #b42318;
+
+  font-size: 13px !important;
+
+  line-height: 1.5 !important;
+}
