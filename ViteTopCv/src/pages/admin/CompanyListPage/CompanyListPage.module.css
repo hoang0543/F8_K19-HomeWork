@@ -1,0 +1,180 @@
+.page {
+    min-height: 100vh;
+    padding: 32px;
+    background: #f5f7f9;
+}
+
+.pageHeader {
+    margin-bottom: 24px;
+}
+
+.titleIcon {
+    color: #00b14f;
+    font-size: 30px !important;
+}
+
+.title {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    color: #18191c;
+}
+
+.description {
+    margin-top: 8px !important;
+    font-size: 14px !important;
+    color: #667085;
+}
+
+.totalBox {
+    min-width: 110px;
+    padding: 14px 22px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #eaecf0;
+    border-radius: 12px;
+}
+
+.totalNumber {
+    color: #00b14f;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+}
+
+.totalLabel {
+    margin-top: 2px !important;
+    color: #667085;
+    font-size: 13px !important;
+}
+
+.tableCard {
+    overflow: hidden;
+    background: #ffffff !important;
+    border: 1px solid #eaecf0;
+    border-radius: 14px !important;
+    box-shadow: none !important;
+}
+
+.tableCard :global(.MuiTableCell-head) {
+    background: #f9fafb;
+    color: #475467;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tableCard :global(.MuiTableCell-body) {
+    color: #344054;
+    font-size: 13px;
+    border-bottom: 1px solid #f0f1f3;
+}
+
+.companyAvatar {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #e8f8ef;
+    color: #00b14f;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.companyText {
+    min-width: 0;
+    max-width: 250px;
+}
+
+.companyName {
+    overflow: hidden;
+    color: #18191c;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shortName {
+    margin-top: 3px !important;
+
+    overflow: hidden;
+
+    color: #98a2b3;
+    font-size: 12px !important;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.statusChip {
+    font-weight: 600 !important;
+}
+
+.detailButton {
+    min-width: 100px !important;
+
+    color: #00b14f !important;
+    border-color: #00b14f !important;
+
+    text-transform: none !important;
+    font-weight: 600 !important;
+}
+
+.detailButton:hover {
+    background: #e8f8ef !important;
+    border-color: #008c40 !important;
+}
+
+.paginationArea {
+    padding: 18px 20px;
+}
+
+.paginationText {
+    color: #667085;
+    font-size: 13px !important;
+}
+
+.loading,
+.empty,
+.errorBox {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.empty {
+    color: #98a2b3;
+}
+
+.emptyIcon {
+    font-size: 52px !important;
+    color: #d0d5dd;
+}
+
+.errorText {
+    color: #d92d20;
+    font-weight: 500 !important;
+}
+
+@media (max-width: 900px) {
+    .page {
+        padding: 20px;
+    }
+
+    .pageHeader {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+        gap: 16px;
+    }
+}

@@ -1,0 +1,220 @@
+.page {
+    min-height: 100vh;
+    padding: 32px;
+    background: #f5f7f9;
+}
+
+.backButton {
+    margin-bottom: 20px !important;
+
+    color: #475467 !important;
+
+    text-transform: none !important;
+    font-weight: 600 !important;
+}
+
+.companyHeader,
+.card {
+    max-width: 1100px;
+    margin: 0 auto 20px;
+
+    border: 1px solid #eaecf0;
+    border-radius: 14px !important;
+
+    background: #ffffff !important;
+
+    box-shadow: none !important;
+}
+
+.companyHeader {
+    padding: 24px;
+}
+
+.card {
+    padding: 26px;
+}
+
+.companyLogo {
+    width: 76px;
+    height: 76px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background: #e8f8ef;
+    color: #00b14f;
+
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.logoImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.companyName {
+    max-width: 760px;
+
+    color: #18191c;
+
+    font-size: 24px !important;
+    font-weight: 700 !important;
+
+    line-height: 1.4 !important;
+}
+
+.shortName {
+    margin-top: 4px !important;
+
+    color: #667085;
+
+    font-size: 14px !important;
+}
+
+.statusArea {
+    margin-top: 12px;
+}
+
+.sectionTitle {
+    color: #18191c;
+
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+
+.divider {
+    margin: 18px 0 22px !important;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 26px 36px;
+}
+
+.infoItem {
+    min-width: 0;
+}
+
+.fullWidth {
+    grid-column: 1 / -1;
+}
+
+.infoLabelArea {
+    margin-bottom: 8px;
+}
+
+.infoIcon {
+    color: #00b14f;
+    font-size: 19px !important;
+}
+
+.infoLabel {
+    color: #667085;
+
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+.infoValue {
+    color: #18191c;
+
+    font-size: 15px !important;
+    font-weight: 500 !important;
+
+    line-height: 1.6 !important;
+
+    word-break: break-word;
+}
+
+.descriptionHtml {
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.notFoundPage {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: #f5f7f9;
+
+    text-align: center;
+}
+
+.notFoundIcon {
+    margin-bottom: 16px;
+
+    color: #d0d5dd;
+
+    font-size: 70px !important;
+}
+
+.notFoundTitle {
+    color: #18191c;
+
+    font-size: 22px !important;
+    font-weight: 700 !important;
+}
+
+.notFoundDescription {
+    margin-top: 8px !important;
+
+    color: #667085;
+
+    font-size: 14px !important;
+}
+
+.backPrimaryButton {
+    margin-top: 22px !important;
+
+    background: #00b14f !important;
+
+    text-transform: none !important;
+    font-weight: 600 !important;
+}
+
+.backPrimaryButton:hover {
+    background: #008c40 !important;
+}
+
+@media (max-width: 768px) {
+    .page {
+        padding: 20px;
+    }
+
+    .infoGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .fullWidth {
+        grid-column: auto;
+    }
+
+    .companyName {
+        font-size: 19px !important;
+    }
+
+    .companyLogo {
+        width: 60px;
+        height: 60px;
+    }
+}

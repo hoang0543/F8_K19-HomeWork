@@ -25,6 +25,8 @@ import EastIcon from "@mui/icons-material/East";
 
 import styles from "./CandidateLoginPage.module.css";
 
+import {login} from "../../../services/authService.js";
+
 /* =========================
    LOGO
 ========================= */
@@ -139,13 +141,19 @@ export default function CandidateLoginPage() {
     const [showPassword, setShowPassword] =
         useState(false);
 
-    const redirectPath =
-        location.state?.from || "/jobs";
-
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
+
+    const [loading, setLoading] =
+        useState(false);
+
+    const [serverError, setServerError] =
+        useState("");
+
+    const redirectPath =
+        location.state?.from || "/jobs";
 
     /* =========================
        INPUT
@@ -158,18 +166,180 @@ export default function CandidateLoginPage() {
             ...previous,
             [name]: value,
         }));
+
+        // User nhập lại thì xóa lỗi cũ
+        if (serverError) {
+            setServerError("");
+        }
     };
 
     /* =========================
        LOGIN
     ========================= */
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
 
-        console.log("Login data:", formData);
+        // =========================
+        // VALIDATE
+        // =========================
 
-        navigate("/jobs");
+        if (
+            !formData.email.trim() ||
+            !formData.password
+        ) {
+            setServerError(
+                "Vui lòng nhập email và mật khẩu."
+            );
+
+            return;
+        }
+
+        try {
+            setLoading(true);
+            setServerError("");
+
+            const payload = {
+                email: formData.email.trim(),
+                password: formData.password,
+            };
+
+            console.log(
+                "CANDIDATE LOGIN PAYLOAD:",
+                payload
+            );
+
+            // =========================
+            // LOGIN API
+            // =========================
+
+            const data = await login(payload);
+
+            console.log(
+                "CANDIDATE LOGIN RESPONSE:",
+                data
+            );
+
+            // =========================
+            // CHECK RESPONSE
+            // =========================
+
+            if (!data?.access_token) {
+                setServerError(
+                    "Không nhận được token đăng nhập."
+                );
+
+                return;
+            }
+
+            if (!data?.user) {
+                setServerError(
+                    "Không nhận được thông tin tài khoản."
+                );
+
+                return;
+            }
+
+            // =========================
+            // CHECK ROLE
+            // =========================
+
+            if (data.user.role !== "CANDIDATE") {
+                setServerError(
+                    "Tài khoản này không phải tài khoản ứng viên."
+                );
+
+                return;
+            }
+
+            // =========================
+            // CLEAR OLD LOGIN
+            // =========================
+
+            localStorage.removeItem(
+                "access_token"
+            );
+
+            localStorage.removeItem(
+                "user"
+            );
+
+            localStorage.removeItem(
+                "company"
+            );
+
+            localStorage.removeItem(
+                "company_name"
+            );
+
+            // =========================
+            // SAVE CANDIDATE LOGIN
+            // =========================
+
+            localStorage.setItem(
+                "access_token",
+                data.access_token
+            );
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.user)
+            );
+
+            console.log(
+                "SAVED TOKEN:",
+                localStorage.getItem(
+                    "access_token"
+                )
+            );
+
+            console.log(
+                "SAVED USER:",
+                JSON.parse(
+                    localStorage.getItem("user")
+                )
+            );
+
+            // =========================
+            // REDIRECT
+            // =========================
+
+            navigate(redirectPath, {
+                replace: true,
+            });
+        } catch (error) {
+            console.error(
+                "CANDIDATE LOGIN ERROR:",
+                error.response?.data || error
+            );
+
+            const status =
+                error.response?.status;
+
+            if (status === 401) {
+                setServerError(
+                    "Email hoặc mật khẩu không chính xác."
+                );
+
+                return;
+            }
+
+            if (status === 422) {
+                setServerError(
+                    error.response?.data?.message ||
+                    "Dữ liệu đăng nhập không hợp lệ."
+                );
+
+                return;
+            }
+
+            setServerError(
+                error.response?.data?.message ||
+                "Đăng nhập thất bại. Vui lòng thử lại."
+            );
+        } finally {
+            setLoading(false);
+        }
     };
 
     /* =========================
@@ -353,16 +523,31 @@ export default function CandidateLoginPage() {
                         />
                     </Box>
 
+                    {serverError && (
+                        <Typography
+                            className={styles.serverError}
+                        >
+                            {serverError}
+                        </Typography>
+                    )}
+
                     {/* LOGIN BUTTON */}
 
                     <Button
                         fullWidth
                         type="submit"
                         variant="contained"
-                        endIcon={<EastIcon/>}
+                        endIcon={
+                            !loading
+                                ? <EastIcon/>
+                                : undefined
+                        }
                         className={styles.loginButton}
+                        disabled={loading}
                     >
-                        Đăng nhập
+                        {loading
+                            ? "Đang đăng nhập..."
+                            : "Đăng nhập"}
                     </Button>
                 </Stack>
 

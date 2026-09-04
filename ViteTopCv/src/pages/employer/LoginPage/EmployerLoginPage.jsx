@@ -19,7 +19,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import styles from "./EmployerLoginPage.module.css";
 
-import {loginEmployer} from "../../../services/authService.js";
+import {login} from "../../../services/authService.js";
 
 /* =========================
    LOGO
@@ -312,7 +312,7 @@ export default function EmployerLoginPage() {
             );
 
             const data =
-                await loginEmployer(payload);
+                await login(payload);
 
             console.log(
                 "EMPLOYER LOGIN RESPONSE:",

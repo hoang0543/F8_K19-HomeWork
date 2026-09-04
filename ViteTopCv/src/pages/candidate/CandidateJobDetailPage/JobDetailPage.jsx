@@ -47,7 +47,7 @@ import Header from "../../../components/Header/Header.jsx";
 
 import {
   getJobBySlug,
-} from "../../../services/jobService.js";
+} from "../../../services/candidateService.js";
 
 import styles from "./JobDetailPage.module.css";
 

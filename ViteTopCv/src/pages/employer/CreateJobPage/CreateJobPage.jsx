@@ -27,7 +27,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 const EDITOR_CONFIG = {licenseKey: "GPL",};
 
 import Header from "../../../components/Header/Header.jsx";
-import {createJob} from "../../../services/jobService.js";
+import {createJob} from "../../../services/employerService.js";
 import {getCurrentEmployerCompany} from "../../../services/employerService.js";
 
 import styles from "./CreateJobPage.module.css";

@@ -31,7 +31,7 @@ import WorkOutlineTwoToneIcon from "@mui/icons-material/WorkOutlineTwoTone";
 
 import Header from "../../../components/Header/Header.jsx";
 import JobCard from "../../../components/jobCard/jobCard.jsx";
-import {getJobs} from "../../../services/jobService.js";
+import {getJobs} from "../../../services/candidateService.js";
 
 import {
     CAREER_GROUPS,

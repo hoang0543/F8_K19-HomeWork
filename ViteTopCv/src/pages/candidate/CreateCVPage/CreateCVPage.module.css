@@ -1,0 +1,457 @@
+:root {
+    --green: #00b14f;
+    --green-dark: #008c40;
+    --text: #172b4d;
+    --muted: #667085;
+    --border: #e5e7eb;
+    --background: #f4f5f7;
+}
+
+.page {
+    min-height: 100vh;
+    background: var(--background);
+}
+
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.pageHeader {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 24px 20px;
+}
+
+.pageTitle {
+    color: var(--text);
+
+    font-size: 26px !important;
+    font-weight: 700 !important;
+}
+
+.pageDescription {
+    margin-top: 5px !important;
+
+    color: var(--muted);
+
+    font-size: 14px !important;
+}
+
+
+/* =========================
+   WORKSPACE
+========================= */
+
+.workspace {
+    width: 100%;
+    max-width: 1240px;
+
+    margin: 0 auto;
+    padding: 0 24px 60px;
+
+    display: grid;
+    grid-template-columns:
+        minmax(0, 760px)
+        minmax(340px, 420px);
+
+    gap: 24px;
+
+    align-items: start;
+}
+
+
+/* =========================
+   CV PREVIEW
+========================= */
+
+.previewArea {
+    min-width: 0;
+
+    display: flex;
+    justify-content: center;
+}
+
+.cvPaper {
+    width: 100%;
+    min-height: 1050px;
+
+    padding: 32px 34px;
+
+    box-sizing: border-box;
+
+    background: #fff;
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 2px 12px
+        rgba(16, 24, 40, 0.08);
+}
+
+.cvHeader {
+    padding-bottom: 20px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 24px;
+}
+
+.cvName {
+    color: #111827;
+
+    font-size: 28px !important;
+    font-weight: 800 !important;
+
+    text-transform: uppercase;
+}
+
+.cvPosition {
+    margin-top: 4px !important;
+
+    color: var(--green);
+
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+.contact {
+    color: #475467;
+
+    font-size: 11px;
+}
+
+.contact svg {
+    width: 14px;
+    height: 14px;
+
+    color: var(--green);
+}
+
+
+/* =========================
+   CV SECTION
+========================= */
+
+.cvSection {
+    margin-top: 22px;
+}
+
+.cvSectionTitle {
+    margin-bottom: 12px !important;
+    padding-bottom: 6px;
+
+    border-bottom: 1.5px solid #344054;
+
+    color: #101828;
+
+    font-size: 13px !important;
+    font-weight: 800 !important;
+}
+
+.cvParagraph {
+    color: #344054;
+
+    font-size: 11.5px !important;
+    line-height: 1.7 !important;
+
+    white-space: pre-line;
+}
+
+.cvItem {
+    padding: 8px 0;
+
+    display: grid;
+    grid-template-columns: 110px 1fr;
+
+    gap: 18px;
+}
+
+.cvItem + .cvItem {
+    border-top: 1px solid #f2f4f7;
+}
+
+.cvItemDate {
+    padding-top: 2px;
+
+    color: #667085;
+
+    font-size: 10px;
+}
+
+.cvItemContent {
+    min-width: 0;
+}
+
+.cvItemTitle {
+    color: #101828;
+
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+.cvItemSubtitle {
+    margin: 2px 0 5px !important;
+
+    color: #344054;
+
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+
+.emptyPreview {
+    color: #98a2b3;
+
+    font-size: 11px !important;
+    font-style: italic;
+}
+
+
+/* =========================
+   SKILLS
+========================= */
+
+.skillList {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.skill {
+    padding: 5px 10px;
+
+    border-radius: 4px;
+
+    background: #ecfdf3;
+
+    color: var(--green-dark);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================
+   EDITOR
+========================= */
+
+.editor {
+    position: sticky;
+    top: 20px;
+
+    max-height: calc(100vh - 40px);
+
+    padding: 22px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    background: #fff;
+
+    border: 1px solid #eaecf0;
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 16px
+        rgba(16, 24, 40, 0.06);
+}
+
+.editorTitle {
+    margin-bottom: 20px !important;
+
+    color: var(--text);
+
+    font-size: 20px !important;
+    font-weight: 700 !important;
+}
+
+
+/* =========================
+   FORM SECTION
+========================= */
+
+.formSection {
+    padding: 18px 0;
+
+    border-top: 1px solid #eaecf0;
+}
+
+.formSection:first-of-type {
+    border-top: 0;
+}
+
+.formSectionHeader {
+    margin-bottom: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.formSectionTitle {
+    color: #344054;
+
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+
+.formSectionHeader button {
+    color: var(--green);
+
+    text-transform: none;
+}
+
+.formItem {
+    padding: 14px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+
+    background: #f9fafb;
+
+    border: 1px solid #eaecf0;
+    border-radius: 10px;
+}
+
+.itemHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.itemTitle {
+    color: #344054;
+
+    font-size: 13px !important;
+    font-weight: 700 !important;
+}
+
+.dateRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+}
+
+
+/* =========================
+   MUI INPUT
+========================= */
+
+.editor :global(.MuiOutlinedInput-root) {
+    border-radius: 8px;
+}
+
+.editor :global(.MuiInputLabel-root) {
+    font-size: 14px;
+}
+
+.editor :global(.MuiInputBase-input) {
+    font-size: 14px;
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+.saveButton {
+    height: 48px;
+
+    margin-top: 20px !important;
+
+    border-radius: 8px !important;
+
+    background: var(--green) !important;
+
+    font-weight: 700 !important;
+
+    text-transform: none !important;
+}
+
+.saveButton:hover {
+    background: var(--green-dark) !important;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .editor {
+        position: static;
+
+        max-height: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .pageHeader {
+        padding:
+            22px 16px
+            16px;
+    }
+
+    .workspace {
+        padding:
+            0 16px
+            40px;
+
+        gap: 18px;
+    }
+
+    .cvPaper {
+        min-height: 850px;
+
+        padding: 24px 20px;
+    }
+
+    .cvHeader {
+        flex-direction: column;
+    }
+
+    .cvName {
+        font-size: 23px !important;
+    }
+
+    .cvItem {
+        grid-template-columns: 1fr;
+
+        gap: 5px;
+    }
+
+    .dateRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+.errorMessage {
+    margin-top: 12px !important;
+
+    color: #d92d20;
+
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+.successMessage {
+    margin-top: 12px !important;
+
+    color: #00b14f;
+
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}

@@ -25,6 +25,7 @@ import {
 } from "../../data/CandidateJobListPage.js";
 
 import styles from "./Header.module.css";
+import {logout} from "../../services/authService.js";
 
 const GREEN = "#00B14F";
 const GREEN_DARK = "#008C40";
@@ -318,12 +319,34 @@ export default function Header({mode = "candidate", companyName = "",}) {
     const [openMenu, setOpenMenu] =
         useState(null);
 
-    const handleLogout = () => {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("user");
-        localStorage.removeItem("company_name");
+    const token =
+        localStorage.getItem("access_token");
 
-        navigate("/employer/login", {
+    const savedUser =
+        localStorage.getItem("user");
+
+    let currentUser = null;
+
+    try {
+        currentUser = savedUser
+            ? JSON.parse(savedUser)
+            : null;
+    } catch {
+        currentUser = null;
+    }
+
+    const isCandidate =
+        Boolean(token) &&
+        currentUser?.role === "CANDIDATE";
+
+    const isEmployer =
+        Boolean(token) &&
+        currentUser?.role === "EMPLOYER";
+
+    const handleLogout = () => {
+        logout();
+
+        navigate("/jobs", {
             replace: true,
         });
     };
@@ -336,6 +359,20 @@ export default function Header({mode = "candidate", companyName = "",}) {
 
         navigate("/employer/login");
     };
+
+    const handleNavClick = (item) => {
+    setOpenMenu(null);
+
+    if (item.menu === "cv") {
+        navigate("/candidate/cv/create");
+        return;
+    }
+
+    if (item.menu === "jobs") {
+        navigate("/jobs");
+        return;
+    }
+};
 
     return (
         <Box
@@ -375,6 +412,9 @@ export default function Header({mode = "candidate", companyName = "",}) {
                                     className={styles.navItem}
                                     onMouseEnter={() =>
                                         setOpenMenu(item.menu)
+                                    }
+                                    onClick={() =>
+                                        handleNavClick(item)
                                     }
                                 >
                                     <Typography
@@ -421,31 +461,104 @@ export default function Header({mode = "candidate", companyName = "",}) {
                     alignItems="center"
                     spacing={1.5}
                 >
-                    {/* =====================
-            CANDIDATE MODE
-        ===================== */}
+
 
                     {mode === "candidate" && (
                         <>
-                            <Button
-                                variant="outlined"
-                                className={styles.registerButton}
-                                onClick={() =>
-                                    navigate("/candidate/register")
-                                }
-                            >
-                                Đăng ký
-                            </Button>
+                            {isCandidate ? (
+                                <>
+                                    <Box
+                                        className={
+                                            styles.candidateAccount
+                                        }
+                                    >
+                                        <Box
+                                            className={
+                                                styles.candidateAvatar
+                                            }
+                                        >
+                                            {(
+                                                currentUser?.full_name ||
+                                                currentUser?.email ||
+                                                "U"
+                                            )
+                                                .charAt(0)
+                                                .toUpperCase()}
+                                        </Box>
 
-                            <Button
-                                variant="contained"
-                                className={styles.loginButton}
-                                onClick={() =>
-                                    navigate("/candidate/login")
-                                }
-                            >
-                                Đăng nhập
-                            </Button>
+                                        <Box
+                                            className={
+                                                styles.candidateInfo
+                                            }
+                                        >
+                                            <Typography
+                                                className={
+                                                    styles.candidateLabel
+                                                }
+                                            >
+                                                Ứng viên
+                                            </Typography>
+
+                                            <Typography
+                                                className={
+                                                    styles.candidateName
+                                                }
+                                                title={
+                                                    currentUser?.full_name ||
+                                                    currentUser?.email ||
+                                                    ""
+                                                }
+                                            >
+                                                {currentUser?.full_name ||
+                                                    currentUser?.email ||
+                                                    "Ứng viên"}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+
+                                    <Button
+                                        className={
+                                            styles.logoutButton
+                                        }
+                                        startIcon={<LogoutIcon/>}
+                                        onClick={handleLogout}
+                                    >
+                                        Đăng xuất
+                                    </Button>
+                                </>
+                            ) : (
+                                !isEmployer && (
+                                    <>
+                                        <Button
+                                            variant="outlined"
+                                            className={
+                                                styles.registerButton
+                                            }
+                                            onClick={() =>
+                                                navigate(
+                                                    "/candidate/register"
+                                                )
+                                            }
+                                        >
+                                            Đăng ký
+                                        </Button>
+
+                                        <Button
+                                            variant="contained"
+                                            className={
+                                                styles.loginButton
+                                            }
+                                            onClick={() =>
+                                                navigate(
+                                                    "/candidate/login"
+                                                )
+                                            }
+                                        >
+                                            Đăng nhập
+                                        </Button>
+                                    </>
+                                )
+                            )}
                         </>
                     )}
 
@@ -453,7 +566,7 @@ export default function Header({mode = "candidate", companyName = "",}) {
             EMPLOYER MODE
         ===================== */}
 
-                    {mode === "employer" && (
+                    {mode === "employer" && isEmployer && (
                         <>
                             <Box className={styles.companyAccount}>
                                 <Box className={styles.companyAvatar}>
@@ -485,7 +598,6 @@ export default function Header({mode = "candidate", companyName = "",}) {
                             </Button>
                         </>
                     )}
-
                     {/* =====================
             EMPLOYER BUTTON
         ===================== */}
