@@ -55,14 +55,14 @@ function TopCvLogo({
                             : styles.logoTop
                     }
                 >
-                    top
+                    MINAno
                 </Box>
 
                 <Box
                     component="span"
                     className={styles.logoCv}
                 >
-                    cv
+                    CV
                 </Box>
             </Typography>
 

@@ -15,15 +15,10 @@ import {
   Typography,
   Button,
   Chip,
-  TextField,
-  InputAdornment,
   CircularProgress,
   Alert,
 } from "@mui/material";
 
-import SearchIcon from "@mui/icons-material/Search";
-import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import WorkHistoryOutlinedIcon from "@mui/icons-material/WorkHistoryOutlined";
@@ -43,7 +38,8 @@ import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import Header from "../../../components/Header/Header.jsx";
+import Header from "../../../components/header/Header.jsx";
+import HeroSearch from "../../../components/search/HeroSearch.jsx";
 
 import {
   getJobBySlug,
@@ -172,138 +168,6 @@ function formatJobType(jobType) {
     jobTypeMap[jobType] ||
     jobType ||
     "Chưa cập nhật"
-  );
-}
-
-/* =========================================================
-   SEARCH BAR
-========================================================= */
-
-function JobSearchBar() {
-  const [keyword, setKeyword] =
-    useState("");
-
-  const [location, setLocation] =
-    useState("");
-
-  const handleSearch = () => {
-    console.log({
-      keyword,
-      location,
-    });
-
-    /*
-      Sau này nếu BE có API search:
-
-      GET /jobs?keyword=...&location=...
-
-      thì gọi API tại đây.
-    */
-  };
-
-  return (
-    <Box
-      className={
-        styles.searchSection
-      }
-    >
-      <Box
-        className={
-          styles.searchContainer
-        }
-      >
-        {/* CATEGORY */}
-
-        <Box
-          className={
-            styles.categorySearch
-          }
-        >
-          <Typography>
-            ☷
-          </Typography>
-
-          <Typography
-            className={
-              styles.categorySearchText
-            }
-          >
-            Danh mục Nghề
-          </Typography>
-
-          <KeyboardArrowDownIcon />
-        </Box>
-
-        {/* KEYWORD */}
-
-        <TextField
-          fullWidth
-          placeholder="Vị trí tuyển dụng"
-          variant="standard"
-          value={keyword}
-          onChange={(event) =>
-            setKeyword(
-              event.target.value
-            )
-          }
-          className={
-            styles.searchInput
-          }
-          InputProps={{
-            disableUnderline: true,
-
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-
-        {/* LOCATION */}
-
-        <TextField
-          placeholder="Địa điểm"
-          variant="standard"
-          value={location}
-          onChange={(event) =>
-            setLocation(
-              event.target.value
-            )
-          }
-          className={
-            styles.locationInput
-          }
-          InputProps={{
-            disableUnderline: true,
-
-            startAdornment: (
-              <InputAdornment position="start">
-                <PlaceOutlinedIcon />
-              </InputAdornment>
-            ),
-
-            endAdornment: (
-              <InputAdornment position="end">
-                <KeyboardArrowDownIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-
-        {/* SEARCH */}
-
-        <Button
-          variant="contained"
-          className={
-            styles.searchButton
-          }
-          onClick={handleSearch}
-        >
-          Tìm kiếm
-        </Button>
-      </Box>
-    </Box>
   );
 }
 
@@ -980,16 +844,7 @@ function LoadingPage() {
       <Header />
 
       <Box
-        sx={{
-          minHeight: "60vh",
-
-          display: "flex",
-
-          alignItems: "center",
-
-          justifyContent:
-            "center",
-        }}
+        className={styles.loadingState}
       >
         <Stack
           spacing={2}
@@ -1012,6 +867,20 @@ function LoadingPage() {
 ========================================================= */
 
 export default function JobDetailPage() {
+  const navigate = useNavigate();
+
+  const handleSearch = ({ keyword = "", category = "", location = "" }) => {
+    const params = new URLSearchParams();
+
+    for (const [key, value] of Object.entries({ keyword, category, location })) {
+      const trimmed = value.trim();
+      if (trimmed) params.set(key, trimmed);
+    }
+
+    const query = params.toString();
+    navigate(query ? `/jobs?${query}` : "/jobs");
+  };
+
   const { slug } =
     useParams();
 
@@ -1182,7 +1051,9 @@ export default function JobDetailPage() {
     >
       <Header />
 
-      <JobSearchBar />
+      <Box className={styles.searchSection}>
+        <HeroSearch onSearch={handleSearch} />
+      </Box>
 
       <Box
         className={styles.main}

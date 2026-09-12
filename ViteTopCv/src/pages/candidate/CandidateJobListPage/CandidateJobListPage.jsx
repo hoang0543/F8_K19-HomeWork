@@ -1,556 +1,48 @@
 import {
     useEffect,
     useMemo,
-    useRef,
     useState,
 } from "react";
 
 import {
+    Alert,
     Box,
-    Stack,
-    Typography,
-    TextField,
     Button,
     Chip,
-    IconButton,
-    InputAdornment,
-    Divider,
     CircularProgress,
-    Alert,
-    useTheme,
+    IconButton,
+    Stack,
+    Typography,
     useMediaQuery,
+    useTheme,
 } from "@mui/material";
 
-import SearchIcon from "@mui/icons-material/Search";
-import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TuneIcon from "@mui/icons-material/Tune";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import WorkOutlineTwoToneIcon from "@mui/icons-material/WorkOutlineTwoTone";
 
-import Header from "../../../components/Header/Header.jsx";
+import Header from "../../../components/header/Header.jsx";
 import JobCard from "../../../components/jobCard/jobCard.jsx";
-import {getJobs} from "../../../services/candidateService.js";
+import HeroSearch from "../../../components/search/HeroSearch.jsx";
+
+import {
+    getJobs,
+} from "../../../services/candidateService.js";
+
+import {
+    normalizeText,
+} from "../../../utils/searchUtils.js";
 
 import {
     CAREER_GROUPS,
-    POSITIONS,
-    PROVINCES,
 } from "../../../data/CandidateJobListPage.js";
 
 import styles from "./CandidateJobListPage.module.css";
 
-/* =========================
-   HERO SEARCH
-========================= */
 
-function HeroSearch() {
-    const [categoryOpen, setCategoryOpen] = useState(false);
-    const [locationOpen, setLocationOpen] = useState(false);
-    const [locationSearch, setLocationSearch] = useState("");
-    const [selectedLocation, setSelectedLocation] = useState("");
-    const [keyword, setKeyword] = useState("");
-
-    const categoryRef = useRef(null);
-    const locationRef = useRef(null);
-
-    const filteredProvinces = PROVINCES.filter((province) =>
-        province
-            .toLowerCase()
-            .includes(locationSearch.toLowerCase())
-    );
-
-    /*
-     * Gom toàn bộ nghề từ các group
-     */
-    const allJobs = CAREER_GROUPS.flatMap(
-        (group) => group.jobs
-    );
-
-    /*
-     * Chia danh sách nghề thành 2 cột
-     */
-    const middleIndex = Math.ceil(
-        allJobs.length / 2
-    );
-
-    const firstJobColumn = allJobs.slice(
-        0,
-        middleIndex
-    );
-
-    const secondJobColumn = allJobs.slice(
-        middleIndex
-    );
-
-    /*
-     * Click ra ngoài dropdown
-     */
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                categoryRef.current &&
-                !categoryRef.current.contains(event.target)
-            ) {
-                setCategoryOpen(false);
-            }
-
-            if (
-                locationRef.current &&
-                !locationRef.current.contains(event.target)
-            ) {
-                setLocationOpen(false);
-            }
-        };
-
-        document.addEventListener(
-            "mousedown",
-            handleClickOutside
-        );
-
-        return () => {
-            document.removeEventListener(
-                "mousedown",
-                handleClickOutside
-            );
-        };
-    }, []);
-
-    const handleSearch = () => {
-        console.log({
-            keyword,
-            location: selectedLocation,
-        });
-    };
-
-    return (
-        <Box className={styles.hero}>
-            {/* =========================
-          TITLE
-      ========================= */}
-
-            <Typography className={styles.heroTitle}>
-                Tìm việc làm nhanh 24H, việc làm mới nhất
-                trên toàn quốc
-            </Typography>
-
-            <Typography
-                className={styles.heroDescription}
-            >
-                Tiếp cận 60.000+ tin tuyển dụng việc làm
-                mỗi ngày từ hàng nghìn doanh nghiệp uy
-                tín tại Việt Nam
-            </Typography>
-
-            {/* =========================
-          SEARCH
-      ========================= */}
-
-            <Box
-                ref={categoryRef}
-                className={styles.searchWrapper}
-            >
-                <Stack
-                    className={
-                        categoryOpen
-                            ? `${styles.searchBar} ${styles.searchBarOpen}`
-                            : styles.searchBar
-                    }
-                >
-                    {/* CATEGORY */}
-
-                    <Box
-                        className={styles.categoryButton}
-                        onClick={() =>
-                            setCategoryOpen(
-                                (previous) => !previous
-                            )
-                        }
-                    >
-                        <Stack
-                            direction="row"
-                            alignItems="center"
-                            spacing={1}
-                        >
-                            <WorkOutlineTwoToneIcon
-                                className={
-                                    styles.categoryMainIcon
-                                }
-                            />
-
-                            <Typography
-                                className={
-                                    styles.categoryButtonText
-                                }
-                            >
-                                Danh mục nghề nghiệp
-                            </Typography>
-                        </Stack>
-
-                        <KeyboardArrowDownIcon
-                            className={
-                                categoryOpen
-                                    ? `${styles.categoryArrow} ${styles.categoryArrowOpen}`
-                                    : styles.categoryArrow
-                            }
-                        />
-                    </Box>
-
-                    <Divider
-                        orientation="vertical"
-                        flexItem
-                        className={styles.searchDivider}
-                    />
-
-                    {/* KEYWORD */}
-
-                    <TextField
-                        placeholder="Vị trí tuyển dụng, tên công ty"
-                        fullWidth
-                        variant="standard"
-                        value={keyword}
-                        onChange={(event) =>
-                            setKeyword(event.target.value)
-                        }
-                        className={styles.searchInput}
-                        InputProps={{
-                            disableUnderline: true,
-
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <SearchIcon
-                                        className={styles.searchIcon}
-                                    />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-
-                    <Divider
-                        orientation="vertical"
-                        flexItem
-                        className={styles.searchDivider}
-                    />
-
-                    {/* LOCATION */}
-
-                    <Box
-                        ref={locationRef}
-                        className={styles.locationWrapper}
-                    >
-                        <TextField
-                            placeholder="Địa điểm"
-                            variant="standard"
-                            value={
-                                locationOpen
-                                    ? locationSearch
-                                    : selectedLocation
-                            }
-                            className={styles.locationInput}
-                            onFocus={() => {
-                                setLocationOpen(true);
-
-                                setLocationSearch(
-                                    selectedLocation
-                                );
-                            }}
-                            onChange={(event) => {
-                                setLocationSearch(
-                                    event.target.value
-                                );
-
-                                setLocationOpen(true);
-                            }}
-                            InputProps={{
-                                disableUnderline: true,
-
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <PlaceOutlinedIcon
-                                            className={
-                                                styles.locationIcon
-                                            }
-                                        />
-                                    </InputAdornment>
-                                ),
-
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <KeyboardArrowDownIcon
-                                            className={
-                                                locationOpen
-                                                    ? `${styles.locationArrow} ${styles.locationArrowOpen}`
-                                                    : styles.locationArrow
-                                            }
-                                        />
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-
-                        {locationOpen && (
-                            <Box
-                                className={
-                                    styles.locationDropdown
-                                }
-                            >
-                                <Typography
-                                    className={
-                                        styles.locationDropdownTitle
-                                    }
-                                >
-                                    Tỉnh / Thành phố
-                                </Typography>
-
-                                <Box
-                                    className={styles.locationList}
-                                >
-                                    {filteredProvinces.length >
-                                    0 ? (
-                                        filteredProvinces.map(
-                                            (province) => (
-                                                <Box
-                                                    key={province}
-                                                    className={
-                                                        selectedLocation ===
-                                                        province
-                                                            ? `${styles.locationItem} ${styles.locationItemActive}`
-                                                            : styles.locationItem
-                                                    }
-                                                    onClick={() => {
-                                                        setSelectedLocation(
-                                                            province
-                                                        );
-
-                                                        setLocationSearch(
-                                                            province
-                                                        );
-
-                                                        setLocationOpen(false);
-                                                    }}
-                                                >
-                                                    <PlaceOutlinedIcon
-                                                        className={
-                                                            styles.locationItemIcon
-                                                        }
-                                                    />
-
-                                                    <Typography
-                                                        className={
-                                                            styles.locationItemText
-                                                        }
-                                                    >
-                                                        {province}
-                                                    </Typography>
-                                                </Box>
-                                            )
-                                        )
-                                    ) : (
-                                        <Typography
-                                            className={
-                                                styles.noLocation
-                                            }
-                                        >
-                                            Không tìm thấy tỉnh / thành
-                                            phố
-                                        </Typography>
-                                    )}
-                                </Box>
-                            </Box>
-                        )}
-                    </Box>
-
-                    {/* SEARCH BUTTON */}
-
-                    <Button
-                        variant="contained"
-                        startIcon={<SearchIcon/>}
-                        className={styles.searchButton}
-                        onClick={handleSearch}
-                    >
-                        Tìm kiếm
-                    </Button>
-                </Stack>
-
-                {/* =========================
-            CATEGORY DROPDOWN
-        ========================= */}
-
-                {categoryOpen && (
-                    <Box
-                        className={styles.categoryDropdown}
-                        sx={{
-                            p: {
-                                xs: 2,
-                                sm: 2.5,
-                                md: 3,
-                            },
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                display: "grid",
-
-                                gridTemplateColumns: {
-                                    xs: "1fr",
-
-                                    sm:
-                                        "repeat(2, minmax(0, 1fr))",
-
-                                    md:
-                                        "repeat(4, minmax(0, 1fr))",
-                                },
-
-                                columnGap: {
-                                    xs: 0,
-                                    sm: 2,
-                                    md: 2.5,
-                                },
-
-                                rowGap: {
-                                    xs: 2,
-                                    sm: 2,
-                                    md: 1.5,
-                                },
-
-                                alignItems: "start",
-                            }}
-                        >
-                            {/* COLUMN 1 */}
-
-                            <Box
-                                className={
-                                    styles.categoryColumn
-                                }
-                            >
-                                <Typography
-                                    className={
-                                        styles.dropdownTitle
-                                    }
-                                >
-                                    NHÓM NGHỀ
-                                </Typography>
-
-                                <Stack spacing={0}>
-                                    {CAREER_GROUPS.map(
-                                        (group) => (
-                                            <Typography
-                                                key={group.title}
-                                                className={
-                                                    styles.dropdownItem
-                                                }
-                                            >
-                                                {group.title}
-                                            </Typography>
-                                        )
-                                    )}
-                                </Stack>
-                            </Box>
-
-                            {/* COLUMN 2 */}
-
-                            <Box
-                                className={
-                                    styles.categoryColumn
-                                }
-                            >
-                                <Typography
-                                    className={
-                                        styles.dropdownTitle
-                                    }
-                                >
-                                    NGHỀ
-                                </Typography>
-
-                                <Stack spacing={0}>
-                                    {firstJobColumn.map(
-                                        (job) => (
-                                            <Typography
-                                                key={job}
-                                                className={
-                                                    styles.dropdownItem
-                                                }
-                                            >
-                                                {job}
-                                            </Typography>
-                                        )
-                                    )}
-                                </Stack>
-                            </Box>
-
-                            {/* COLUMN 3 */}
-
-                            <Box
-                                className={
-                                    styles.categoryColumn
-                                }
-                            >
-                                <Typography
-                                    className={
-                                        styles.dropdownTitle
-                                    }
-                                >
-                                    NGHỀ
-                                </Typography>
-
-                                <Stack spacing={0}>
-                                    {secondJobColumn.map(
-                                        (job) => (
-                                            <Typography
-                                                key={job}
-                                                className={
-                                                    styles.dropdownItem
-                                                }
-                                            >
-                                                {job}
-                                            </Typography>
-                                        )
-                                    )}
-                                </Stack>
-                            </Box>
-
-                            {/* COLUMN 4 */}
-
-                            <Box
-                                className={
-                                    styles.categoryColumn
-                                }
-                            >
-                                <Typography
-                                    className={
-                                        styles.dropdownTitle
-                                    }
-                                >
-                                    VỊ TRÍ CHUYÊN MÔN
-                                </Typography>
-
-                                <Stack spacing={0}>
-                                    {POSITIONS.map(
-                                        (position) => (
-                                            <Typography
-                                                key={position}
-                                                className={
-                                                    styles.dropdownItem
-                                                }
-                                            >
-                                                {position}
-                                            </Typography>
-                                        )
-                                    )}
-                                </Stack>
-                            </Box>
-                        </Box>
-                    </Box>
-                )}
-            </Box>
-        </Box>
-    );
-}
-
-/* =========================
+/* =========================================================
    CATEGORY + BANNER
-========================= */
+========================================================= */
 
 function CategoriesAndBanner() {
     const theme = useTheme();
@@ -560,86 +52,119 @@ function CategoriesAndBanner() {
     );
 
     const isTablet = useMediaQuery(
-        theme.breakpoints.between("sm", "md")
-    );
-
-    const [categoryPage, setCategoryPage] =
-        useState(0);
-
-    /*
-     * Dùng chung dữ liệu từ CAREER_GROUPS
-     */
-    const allCategories = useMemo(
-        () =>
-            CAREER_GROUPS.flatMap(
-                (group) => group.jobs
-            ),
-        []
-    );
-
-    /*
-     * Responsive số lượng category mỗi trang
-     */
-    const categoriesPerPage = isMobile
-        ? 4
-        : isTablet
-            ? 5
-            : 6;
-
-    const totalPages = Math.max(
-        1,
-        Math.ceil(
-            allCategories.length /
-            categoriesPerPage
+        theme.breakpoints.between(
+            "sm",
+            "md"
         )
     );
 
-    /*
-     * Đảm bảo page luôn hợp lệ
-     */
-    const safePage = Math.min(
+    const [
         categoryPage,
-        totalPages - 1
-    );
+        setCategoryPage,
+    ] = useState(0);
+
+
+    /* =========================
+       CATEGORY DATA
+    ========================= */
+
+    const allCategories =
+        useMemo(
+            () =>
+                CAREER_GROUPS.flatMap(
+                    (group) =>
+                        group.jobs
+                ),
+            []
+        );
+
+    const categoriesPerPage =
+        isMobile
+            ? 4
+            : isTablet
+                ? 5
+                : 6;
+
+    const totalPages =
+        Math.max(
+            1,
+            Math.ceil(
+                allCategories.length /
+                categoriesPerPage
+            )
+        );
+
+    const safePage =
+        Math.min(
+            categoryPage,
+            totalPages - 1
+        );
 
     const startIndex =
-        safePage * categoriesPerPage;
+        safePage *
+        categoriesPerPage;
 
     const visibleCategories =
         allCategories.slice(
             startIndex,
-            startIndex + categoriesPerPage
+            startIndex +
+            categoriesPerPage
         );
 
-    /*
-     * Khi responsive thay đổi số item/page
-     * quay lại trang đầu
-     */
+
+    /* =========================
+       RESET PAGE
+    ========================= */
+
     useEffect(() => {
         setCategoryPage(0);
     }, [categoriesPerPage]);
 
+
+    /* =========================
+       PAGINATION
+    ========================= */
+
     const handlePreviousPage = () => {
-        setCategoryPage((previous) =>
-            previous === 0
-                ? totalPages - 1
-                : previous - 1
+        setCategoryPage(
+            (previous) =>
+                previous === 0
+                    ? totalPages - 1
+                    : previous - 1
         );
     };
 
     const handleNextPage = () => {
-        setCategoryPage((previous) =>
-            previous >= totalPages - 1
-                ? 0
-                : previous + 1
+        setCategoryPage(
+            (previous) =>
+                previous >=
+                totalPages - 1
+                    ? 0
+                    : previous + 1
         );
     };
+
 
     return (
         <Box
             className={
                 styles.categoryBannerSection
             }
+            sx={{
+                px: {
+                    xs: 2,
+                    sm: 3,
+                    md: 4,
+                    lg: 8,
+                },
+                pt: 1,
+                pb: {
+                    xs: 2.75,
+                    sm: 3.5,
+                    md: 4.5,
+                    lg: 5,
+                },
+            }}
         >
             <Box
                 className={
@@ -665,12 +190,15 @@ function CategoriesAndBanner() {
                     },
                 }}
             >
+
                 {/* =========================
-            CATEGORY
-        ========================= */}
+                    CATEGORY LIST
+                ========================= */}
 
                 <Box
-                    className={styles.categoryList}
+                    className={
+                        styles.categoryList
+                    }
                 >
                     <Typography
                         className={
@@ -684,7 +212,9 @@ function CategoriesAndBanner() {
                         {visibleCategories.map(
                             (category) => (
                                 <Stack
-                                    key={category}
+                                    key={
+                                        category
+                                    }
                                     direction="row"
                                     alignItems="center"
                                     justifyContent="space-between"
@@ -710,7 +240,8 @@ function CategoriesAndBanner() {
                         )}
                     </Stack>
 
-                    {/* PAGINATION */}
+
+                    {/* CATEGORY PAGINATION */}
 
                     <Stack
                         direction="row"
@@ -721,323 +252,523 @@ function CategoriesAndBanner() {
                         }
                     >
                         <Typography
-                            className={styles.pageNumber}
+                            className={
+                                styles.pageNumber
+                            }
                         >
-                            {allCategories.length === 0
+                            {allCategories.length ===
+                            0
                                 ? "0 / 0"
                                 : `${safePage + 1} / ${totalPages}`}
                         </Typography>
 
                         <Stack
                             direction="row"
-                            spacing={0.5}
+                            spacing={0.75}
                         >
-                            <Stack direction="row" spacing={0.75}>
-                                <IconButton
-                                    size="small"
-                                    className={`${styles.paginationButton} ${styles.paginationButtonActive}`}
-                                    onClick={handlePreviousPage}
-                                    disabled={totalPages <= 1}
-                                >
-                                    <ChevronLeftIcon/>
-                                </IconButton>
+                            <IconButton
+                                size="small"
+                                className={
+                                    styles.paginationButton
+                                }
+                                onClick={
+                                    handlePreviousPage
+                                }
+                                disabled={
+                                    totalPages <= 1
+                                }
+                            >
+                                <ChevronLeftIcon/>
+                            </IconButton>
 
-                                <IconButton
-                                    size="small"
-                                    className={`${styles.paginationButton} ${styles.paginationButtonActive}`}
-                                    onClick={handleNextPage}
-                                    disabled={totalPages <= 1}
-                                >
-                                    <ChevronRightIcon/>
-                                </IconButton>
-                            </Stack>
+                            <IconButton
+                                size="small"
+                                className={`${styles.paginationButton} ${styles.paginationButtonActive}`}
+                                onClick={
+                                    handleNextPage
+                                }
+                                disabled={
+                                    totalPages <= 1
+                                }
+                            >
+                                <ChevronRightIcon/>
+                            </IconButton>
                         </Stack>
                     </Stack>
                 </Box>
 
-                {/* =========================
-            BANNER
-        ========================= */}
 
+                {/* BANNER */}
                 <Box className={styles.banner}>
                     <Box
-                        className={styles.bannerGlow}
+                        component="img"
+                        className={styles.bannerImage}
+                        src="https://www.topcv.vn/v4/image/mb-life/banner-v3.png"
+                        alt="Banner tuyển dụng MB Life"
+                        sx={{
+                            position: {
+                                xs: "static",
+                                md: "absolute",
+                            },
+                            height: {
+                                xs: "auto",
+                                md: "100%",
+                            },
+                        }}
                     />
-
-                    <Stack
-                        className={
-                            styles.bannerContent
-                        }
-                    >
-                        <Typography
-                            className={
-                                styles.bannerBadge
-                            }
-                        >
-                            TOPCV RECOMMEND
-                        </Typography>
-
-                        <Typography
-                            className={
-                                styles.bannerTitle
-                            }
-                        >
-                            Cơ hội việc làm
-
-                            <Box
-                                component="span"
-                                className={
-                                    styles.bannerHighlight
-                                }
-                            >
-                                {" "}
-                                phù hợp hơn
-                            </Box>
-
-                            <br/>
-
-                            dành cho bạn
-                        </Typography>
-
-                        <Typography
-                            className={
-                                styles.bannerDescription
-                            }
-                        >
-                            Khám phá hàng nghìn cơ hội việc
-                            làm mới mỗi ngày và tìm công
-                            việc phù hợp với kinh nghiệm,
-                            kỹ năng và mục tiêu của bạn.
-                        </Typography>
-
-                        <Stack
-                            direction="row"
-                            spacing={1.5}
-                            alignItems="center"
-                            className={
-                                styles.bannerActions
-                            }
-                        >
-                            <Button
-                                variant="contained"
-                                className={
-                                    styles.bannerButton
-                                }
-                            >
-                                Khám phá ngay
-                            </Button>
-
-                            <Typography
-                                className={
-                                    styles.bannerSubText
-                                }
-                            >
-                                60.000+ việc làm mới
-                            </Typography>
-                        </Stack>
-                    </Stack>
-
-                    <Box
-                        className={
-                            styles.bannerDecoration
-                        }
-                    >
-                        <Box
-                            className={
-                                styles.decorationCircleLarge
-                            }
-                        />
-
-                        <Box
-                            className={
-                                styles.decorationCircleSmall
-                            }
-                        />
-
-                        <Typography
-                            className={
-                                styles.bannerStat
-                            }
-                        >
-                            <Box
-                                component="span"
-                                className={
-                                    styles.bannerStatNumber
-                                }
-                            >
-                                24H
-                            </Box>
-
-                            <Box
-                                component="span"
-                                className={
-                                    styles.bannerStatText
-                                }
-                            >
-                                cập nhật việc làm mới
-                            </Box>
-                        </Typography>
-                    </Box>
                 </Box>
             </Box>
         </Box>
     );
 }
 
-/* =========================
+
+/* =========================================================
    JOB LIST
-========================= */
+========================================================= */
 
-function JobListSection() {
-    const [jobs, setJobs] = useState([]);
+function JobListSection({
+                            searchKeyword,
+                            searchCategory,
+                            searchLocation,
+                        }) {
+    const [
+        jobs,
+        setJobs,
+    ] = useState([]);
 
-    const [loading, setLoading] =
-        useState(true);
+    const [
+        loading,
+        setLoading,
+    ] = useState(true);
 
-    const [error, setError] = useState("");
+    const [
+        error,
+        setError,
+    ] = useState("");
 
-    const [tab, setTab] =
-        useState("office");
+    const [
+        tab,
+        setTab,
+    ] = useState("office");
 
     const [
         locationFilter,
         setLocationFilter,
-    ] = useState("Ngẫu Nhiên");
+    ] = useState(
+        "Ngẫu Nhiên"
+    );
 
     const locations = [
         "Ngẫu Nhiên",
         "Hà Nội",
         "TP. Hồ Chí Minh",
         "Miền Bắc",
+        "Miền Trung",
         "Miền Nam",
     ];
+
 
     /* =========================
        FETCH JOBS
     ========================= */
 
-    const fetchJobs = async () => {
-        try {
-            setLoading(true);
+    const fetchJobs =
+        async () => {
+            try {
+                setLoading(true);
 
-            setError("");
+                setError("");
 
-            const data = await getJobs();
+                const data =
+                    await getJobs();
 
-            console.log("GET JOBS RESPONSE:", data);
+                console.log(
+                    "GET JOBS RESPONSE:",
+                    data
+                );
 
-            /*
-              Hỗ trợ một số response phổ biến:
+                if (
+                    Array.isArray(data)
+                ) {
+                    setJobs(data);
 
-              [
-                {...},
-                {...}
-              ]
+                    return;
+                }
 
-              hoặc:
+                if (
+                    Array.isArray(
+                        data?.items
+                    )
+                ) {
+                    setJobs(
+                        data.items
+                    );
 
-              {
-                items: [...]
-              }
+                    return;
+                }
 
-              hoặc:
+                if (
+                    Array.isArray(
+                        data?.data
+                    )
+                ) {
+                    setJobs(
+                        data.data
+                    );
 
-              {
-                data: [...]
-              }
+                    return;
+                }
 
-              Sau khi biết chính xác response GET /jobs
-              của BE thì có thể rút gọn phần này.
-            */
+                if (
+                    Array.isArray(
+                        data?.results
+                    )
+                ) {
+                    setJobs(
+                        data.results
+                    );
 
-            if (Array.isArray(data)) {
-                setJobs(data);
+                    return;
+                }
 
-                return;
+                console.warn(
+                    "Không nhận được array jobs:",
+                    data
+                );
+
+                setJobs([]);
+            } catch (error) {
+                console.error(
+                    "GET JOBS ERROR:",
+                    error
+                );
+
+                const message =
+                    error.response
+                        ?.data
+                        ?.detail ||
+                    error.response
+                        ?.data
+                        ?.message ||
+                    "Không thể tải danh sách việc làm";
+
+                setError(
+                    message
+                );
+            } finally {
+                setLoading(
+                    false
+                );
             }
+        };
 
-            if (Array.isArray(data?.items)) {
-                setJobs(data.items);
-
-                return;
-            }
-
-            if (Array.isArray(data?.data)) {
-                setJobs(data.data);
-
-                return;
-            }
-
-            if (Array.isArray(data?.results)) {
-                setJobs(data.results);
-
-                return;
-            }
-
-            console.warn(
-                "Không nhận được array jobs:",
-                data
-            );
-
-            setJobs([]);
-        } catch (error) {
-            console.error(
-                "GET JOBS ERROR:",
-                error
-            );
-
-            const message =
-                error.response?.data?.detail ||
-                error.response?.data?.message ||
-                "Không thể tải danh sách việc làm";
-
-            setError(message);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     useEffect(() => {
         fetchJobs();
     }, []);
 
+
     /* =========================
-       LOCATION FILTER
+       SEARCH + FILTER
     ========================= */
 
-    const displayedJobs = useMemo(() => {
-        if (
-            locationFilter === "Ngẫu Nhiên" ||
-            locationFilter === "Miền Bắc" ||
-            locationFilter === "Miền Nam"
-        ) {
-            return jobs;
-        }
+    const displayedJobs =
+        useMemo(() => {
+            const keyword =
+                normalizeText(
+                    searchKeyword
+                );
 
-        return jobs.filter((job) =>
-            job.work_location?.some(
-                (location) =>
-                    location.city_name ===
-                    locationFilter
-            )
-        );
-    }, [jobs, locationFilter]);
+            const categoryKeyword =
+                normalizeText(
+                    searchCategory
+                );
+
+            const locationKeyword =
+                normalizeText(
+                    searchLocation
+                );
+
+            return jobs.filter(
+                (job) => {
+
+                    /* KEYWORD */
+
+                    const keywordValues = [
+                        job.title,
+                        job.category,
+                        job.specialty,
+                        job.experience_level,
+                        job.job_type,
+
+                        job.company
+                            ?.company_name,
+
+                        job.company
+                            ?.short_name,
+
+                        job.company
+                            ?.international_name,
+                    ];
+
+                    const keywordMatched =
+                        !keyword ||
+                        keywordValues.some(
+                            (value) =>
+                                normalizeText(
+                                    value
+                                ).includes(
+                                    keyword
+                                )
+                        );
+
+
+                    /* CATEGORY */
+
+                    const categoryValues = [
+                        job.category,
+                        job.specialty,
+                        job.title,
+                    ];
+
+                    const categoryMatched =
+                        !categoryKeyword ||
+                        categoryValues.some(
+                            (value) => {
+                                const normalizedValue =
+                                    normalizeText(
+                                        value
+                                    );
+
+                                return (
+                                    normalizedValue.includes(
+                                        categoryKeyword
+                                    ) ||
+                                    categoryKeyword.includes(
+                                        normalizedValue
+                                    )
+                                );
+                            }
+                        );
+
+
+                    /* HERO LOCATION */
+
+                    const heroLocationMatched =
+                        !locationKeyword ||
+                        job.work_location?.some(
+                            (location) =>
+                                normalizeText(
+                                    location.city_name
+                                ).includes(
+                                    locationKeyword
+                                ) ||
+                                normalizeText(
+                                    location.address_detail
+                                ).includes(
+                                    locationKeyword
+                                )
+                        );
+
+
+                    /* LOCATION CHIP */
+
+                    let chipLocationMatched =
+                        true;
+
+                    const normalizedFilter =
+                        normalizeText(
+                            locationFilter
+                        );
+
+                    if (
+                        locationFilter !==
+                        "Ngẫu Nhiên"
+                    ) {
+                        if (
+                            locationFilter ===
+                            "Miền Bắc"
+                        ) {
+                            const northCities = [
+                                "ha noi",
+                                "hai phong",
+                                "quang ninh",
+                                "bac ninh",
+                                "bac giang",
+                                "thai nguyen",
+                                "vinh phuc",
+                                "phu tho",
+                                "hai duong",
+                                "hung yen",
+                                "nam dinh",
+                                "ninh binh",
+                            ];
+
+                            chipLocationMatched =
+                                job.work_location?.some(
+                                    (location) =>
+                                        northCities.some(
+                                            (city) =>
+                                                normalizeText(
+                                                    location.city_name
+                                                ).includes(
+                                                    city
+                                                )
+                                        )
+                                );
+                        } else if (
+                            locationFilter ===
+                            "Miền Trung"
+                        ) {
+                            const centralCities = [
+                                "da nang",
+                                "hue",
+                                "quang nam",
+                                "quang ngai",
+                                "binh dinh",
+                                "khanh hoa",
+                                "nghe an",
+                                "ha tinh",
+                                "thanh hoa",
+                            ];
+
+                            chipLocationMatched =
+                                job.work_location?.some(
+                                    (location) =>
+                                        centralCities.some(
+                                            (city) =>
+                                                normalizeText(
+                                                    location.city_name
+                                                ).includes(
+                                                    city
+                                                )
+                                        )
+                                );
+                        } else if (
+                            locationFilter ===
+                            "Miền Nam"
+                        ) {
+                            const southCities = [
+                                "ho chi minh",
+                                "dong nai",
+                                "binh duong",
+                                "can tho",
+                                "long an",
+                                "ba ria",
+                                "vung tau",
+                                "an giang",
+                                "tay ninh",
+                            ];
+
+                            chipLocationMatched =
+                                job.work_location?.some(
+                                    (location) =>
+                                        southCities.some(
+                                            (city) =>
+                                                normalizeText(
+                                                    location.city_name
+                                                ).includes(
+                                                    city
+                                                )
+                                        )
+                                );
+                        } else {
+                            chipLocationMatched =
+                                job.work_location?.some(
+                                    (location) =>
+                                        normalizeText(
+                                            location.city_name
+                                        ).includes(
+                                            normalizedFilter
+                                        )
+                                );
+                        }
+                    }
+
+
+                    return (
+                        keywordMatched &&
+                        categoryMatched &&
+                        heroLocationMatched &&
+                        chipLocationMatched
+                    );
+                }
+            );
+        }, [
+            jobs,
+            searchKeyword,
+            searchCategory,
+            searchLocation,
+            locationFilter,
+        ]);
+
+
+    /* =========================
+       RENDER
+    ========================= */
 
     return (
-        <Box className={styles.jobSection}>
-            {/* TITLE */}
+        <Box
+            className={
+                styles.jobSection
+            }
+            sx={{
+                px: {
+                    xs: 2,
+                    sm: 3,
+                    md: 4,
+                    lg: 8,
+                },
+
+                py: {
+                    xs: 3.5,
+                    sm: 4,
+                    md: 5,
+                    lg: 6,
+                },
+            }}
+        >
+
+            {/* =========================
+                HEADER
+            ========================= */}
 
             <Stack
-                className={styles.jobSectionHeader}
+                className={
+                    styles.jobSectionHeader
+                }
+                sx={{
+                    flexDirection: {
+                        xs: "column",
+                        sm: "row",
+                    },
+
+                    alignItems: {
+                        xs: "flex-start",
+                        sm: "center",
+                    },
+
+                    justifyContent:
+                        "space-between",
+
+                    gap: {
+                        xs: 1.5,
+                        sm: 2,
+                    },
+                }}
             >
                 <Stack
                     direction="row"
                     spacing={2}
                     alignItems="center"
+                    useFlexGap
                     flexWrap="wrap"
                 >
                     <Typography
-                        className={styles.sectionTitle}
+                        className={
+                            styles.sectionTitle
+                        }
                     >
                         Việc làm tốt nhất
                     </Typography>
@@ -1045,14 +776,19 @@ function JobListSection() {
                     <Stack
                         direction="row"
                         spacing={1}
+                        useFlexGap
+                        flexWrap="wrap"
                     >
                         <Chip
                             label="Việc văn phòng"
                             onClick={() =>
-                                setTab("office")
+                                setTab(
+                                    "office"
+                                )
                             }
                             className={
-                                tab === "office"
+                                tab ===
+                                "office"
                                     ? `${styles.tabChip} ${styles.tabChipActive}`
                                     : styles.tabChip
                             }
@@ -1061,10 +797,13 @@ function JobListSection() {
                         <Chip
                             label="Việc phổ thông"
                             onClick={() =>
-                                setTab("labor")
+                                setTab(
+                                    "labor"
+                                )
                             }
                             className={
-                                tab === "labor"
+                                tab ===
+                                "labor"
                                     ? `${styles.tabChip} ${styles.tabChipActive}`
                                     : styles.tabChip
                             }
@@ -1073,16 +812,77 @@ function JobListSection() {
                 </Stack>
             </Stack>
 
-            {/* FILTER */}
+
+            {/* =========================
+                SEARCH RESULT
+            ========================= */}
+
+            {(
+                searchKeyword ||
+                searchCategory ||
+                searchLocation
+            ) && (
+                <Alert
+                    severity="success"
+                    sx={{
+                        mb: 2,
+                    }}
+                >
+                    Tìm thấy{" "}
+                    {
+                        displayedJobs.length
+                    }{" "}
+                    việc làm
+
+                    {searchKeyword
+                        ? ` với từ khóa "${searchKeyword}"`
+                        : ""}
+
+                    {searchCategory
+                        ? ` thuộc "${searchCategory}"`
+                        : ""}
+
+                    {searchLocation
+                        ? ` tại ${searchLocation}`
+                        : ""}
+                </Alert>
+            )}
+
+
+            {/* =========================
+                FILTER
+            ========================= */}
 
             <Stack
-                className={styles.filterSection}
+                className={
+                    styles.filterSection
+                }
+                sx={{
+                    flexDirection: {
+                        xs: "column",
+                        sm: "row",
+                    },
+
+                    alignItems: {
+                        xs: "flex-start",
+                        sm: "center",
+                    },
+
+                    gap: {
+                        xs: 1,
+                        sm: 1.5,
+                    },
+                }}
             >
                 <Chip
-                    icon={<TuneIcon/>}
+                    icon={
+                        <TuneIcon/>
+                    }
                     label="Lọc theo: Địa điểm"
                     variant="outlined"
-                    className={styles.filterTitle}
+                    className={
+                        styles.filterTitle
+                    }
                 />
 
                 <Stack
@@ -1091,111 +891,270 @@ function JobListSection() {
                     className={
                         styles.locationFilters
                     }
+                    sx={{
+                        width: {
+                            xs: "100%",
+                            sm: "auto",
+                        },
+
+                        overflowX:
+                            "auto",
+                    }}
                 >
-                    {locations.map((location) => (
-                        <Chip
-                            key={location}
-                            label={location}
-                            onClick={() =>
-                                setLocationFilter(location)
-                            }
-                            className={
-                                locationFilter === location
-                                    ? `${styles.locationFilter} ${styles.locationFilterActive}`
-                                    : styles.locationFilter
-                            }
-                        />
-                    ))}
+                    {locations.map(
+                        (location) => (
+                            <Chip
+                                key={
+                                    location
+                                }
+                                label={
+                                    location
+                                }
+                                onClick={() =>
+                                    setLocationFilter(
+                                        location
+                                    )
+                                }
+                                className={
+                                    locationFilter ===
+                                    location
+                                        ? `${styles.locationFilter} ${styles.locationFilterActive}`
+                                        : styles.locationFilter
+                                }
+                            />
+                        )
+                    )}
                 </Stack>
             </Stack>
 
-            {/* INFO */}
 
-            <Box className={styles.infoBox}>
-                💡 Gợi ý: Nhấn vào một việc làm để xem
-                thông tin chi tiết
+            {/* =========================
+                INFO
+            ========================= */}
+
+            <Box
+                className={
+                    styles.infoBox
+                }
+            >
+                💡 Gợi ý: Nhấn vào một
+                việc làm để xem thông tin
+                chi tiết
             </Box>
 
-            {/* LOADING */}
+
+            {/* =========================
+                LOADING
+            ========================= */}
 
             {loading && (
                 <Box
                     sx={{
-                        py: 8,
+                        display:
+                            "flex",
 
-                        display: "flex",
+                        justifyContent:
+                            "center",
 
-                        justifyContent: "center",
+                        py: 6,
                     }}
                 >
                     <CircularProgress/>
                 </Box>
             )}
 
-            {/* ERROR */}
 
-            {!loading && error && (
-                <Stack spacing={2}>
-                    <Alert severity="error">
-                        {error}
-                    </Alert>
+            {/* =========================
+                ERROR
+            ========================= */}
 
-                    <Button
-                        variant="outlined"
-                        onClick={fetchJobs}
-                        sx={{
-                            alignSelf: "flex-start",
-                        }}
+            {!loading &&
+                error && (
+                    <Stack
+                        spacing={2}
                     >
-                        Thử lại
-                    </Button>
-                </Stack>
-            )}
+                        <Alert
+                            severity="error"
+                        >
+                            {error}
+                        </Alert>
 
-            {/* EMPTY */}
+                        <Button
+                            variant="outlined"
+                            onClick={
+                                fetchJobs
+                            }
+                            sx={{
+                                alignSelf:
+                                    "flex-start",
+                            }}
+                        >
+                            Thử lại
+                        </Button>
+                    </Stack>
+                )}
+
+
+            {/* =========================
+                EMPTY
+            ========================= */}
 
             {!loading &&
                 !error &&
-                displayedJobs.length === 0 && (
-                    <Alert severity="info">
-                        Hiện chưa có việc làm phù hợp.
+                displayedJobs.length ===
+                0 && (
+                    <Alert
+                        severity="info"
+                    >
+                        Không tìm thấy việc
+                        làm phù hợp.
                     </Alert>
                 )}
 
-            {/* JOB GRID */}
+
+            {/* =========================
+                JOB GRID
+            ========================= */}
 
             {!loading &&
                 !error &&
-                displayedJobs.length > 0 && (
-                    <Box className={styles.jobGrid}>
-                        {displayedJobs.map((job) => (
-                            <JobCard
-                                key={job.id}
-                                job={job}
-                            />
-                        ))}
+                displayedJobs.length >
+                0 && (
+                    <Box
+                        className={
+                            styles.jobGrid
+                        }
+                        sx={{
+                            display:
+                                "grid",
+
+                            gridTemplateColumns:
+                                {
+                                    xs:
+                                        "1fr",
+
+                                    sm:
+                                        "1fr",
+
+                                    md:
+                                        "repeat(2, minmax(0, 1fr))",
+
+                                    lg:
+                                        "repeat(3, minmax(0, 1fr))",
+                                },
+
+                            gap: {
+                                xs: 1.5,
+                                sm: 2,
+                            },
+                        }}
+                    >
+                        {displayedJobs.map(
+                            (job) => (
+                                <JobCard
+                                    key={
+                                        job.id
+                                    }
+                                    job={
+                                        job
+                                    }
+                                />
+                            )
+                        )}
                     </Box>
                 )}
         </Box>
     );
 }
 
-/* =========================
+
+/* =========================================================
    PAGE
-========================= */
+========================================================= */
 
 export default function CandidateJobListPage() {
-    return (
-        <Box className={styles.page}>
-            <Header mode="candidate" />
+    const [
+        searchParams,
+        setSearchParams,
+    ] = useState({
+        keyword: "",
+        category: "",
+        location: "",
+    });
 
-            <Box className={styles.heroArea}>
-                <HeroSearch/>
+
+    const handleSearch = ({
+                              keyword,
+                              category,
+                              location,
+                          }) => {
+        setSearchParams({
+            keyword:
+                keyword || "",
+
+            category:
+                category || "",
+
+            location:
+                location || "",
+        });
+
+
+        requestAnimationFrame(() => {
+            document
+                .getElementById(
+                    "job-list-section"
+                )
+                ?.scrollIntoView({
+                    behavior:
+                        "smooth",
+
+                    block:
+                        "start",
+                });
+        });
+    };
+
+
+    return (
+        <Box
+            className={
+                styles.page
+            }
+        >
+            <Header
+                mode="candidate"
+            />
+
+            <Box
+                className={
+                    styles.heroArea
+                }
+            >
+                <HeroSearch
+                    onSearch={
+                        handleSearch
+                    }
+                />
 
                 <CategoriesAndBanner/>
             </Box>
 
-            <JobListSection/>
+            <Box
+                id="job-list-section"
+            >
+                <JobListSection
+                    searchKeyword={
+                        searchParams.keyword
+                    }
+                    searchCategory={
+                        searchParams.category
+                    }
+                    searchLocation={
+                        searchParams.location
+                    }
+                />
+            </Box>
         </Box>
     );
 }

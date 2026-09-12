@@ -11,7 +11,7 @@ import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 
-import Header from "../../../components/Header/Header.jsx";
+import Header from "../../../components/header/Header.jsx";
 
 import {
     getCurrentEmployerCompany,

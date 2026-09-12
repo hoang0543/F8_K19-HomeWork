@@ -18,7 +18,7 @@ import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
-import Header from "../../../components/Header/Header.jsx";
+import Header from "../../../components/header/Header.jsx";
 
 import {createCV,} from "../../../services/candidateService.js";
 
