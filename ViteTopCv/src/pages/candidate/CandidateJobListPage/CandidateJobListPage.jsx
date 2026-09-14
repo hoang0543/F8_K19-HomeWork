@@ -20,6 +20,9 @@ import {
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TuneIcon from "@mui/icons-material/Tune";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 
 import Header from "../../../components/header/Header.jsx";
 import JobCard from "../../../components/jobCard/jobCard.jsx";
@@ -1067,6 +1070,59 @@ function JobListSection({
     );
 }
 
+function FloatingActions() {
+    const actions = [
+        {
+            label: "Công việc đã lưu",
+            icon: <BookmarkBorderIcon/>,
+            onClick: () => {
+                console.log("Công việc đã lưu");
+            },
+        },
+        {
+            label: "Góp ý",
+            icon: <RateReviewOutlinedIcon/>,
+            onClick: () => {
+                console.log("Góp ý");
+            },
+        },
+        {
+            label: "Hỗ trợ",
+            icon: <SupportAgentOutlinedIcon/>,
+            onClick: () => {
+                console.log("Hỗ trợ");
+            },
+        },
+    ];
+
+    return (
+        <Stack
+            spacing={1.2}
+            className={styles.floatingActions}
+        >
+            {actions.map((action) => (
+                <Box
+                    key={action.label}
+                    onClick={action.onClick}
+                    className={styles.floatingActionItem}
+                >
+                    <IconButton
+                        size="small"
+                        className={styles.floatingActionIcon}
+                    >
+                        {action.icon}
+                    </IconButton>
+
+                    <Typography
+                        className={styles.floatingActionLabel}
+                    >
+                        {action.label}
+                    </Typography>
+                </Box>
+            ))}
+        </Stack>
+    );
+}
 
 /* =========================================================
    PAGE
@@ -1155,6 +1211,7 @@ export default function CandidateJobListPage() {
                     }
                 />
             </Box>
+            <FloatingActions />
         </Box>
     );
 }

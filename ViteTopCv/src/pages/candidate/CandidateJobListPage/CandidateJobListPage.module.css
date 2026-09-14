@@ -294,3 +294,102 @@
 .jobGrid {
     width: 100%;
 }
+
+/* ========================================
+   FLOATING ACTIONS
+======================================== */
+
+.floatingActions {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+
+    z-index: 1300;
+
+    align-items: flex-end;
+}
+
+/* Action item */
+
+.floatingActionItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    background-color: #fff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.floatingActionItem:hover {
+    transform: translateX(-4px);
+
+    border-color: #00b14f;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+
+/* Icon */
+
+.floatingActionIcon {
+    padding: 4px !important;
+
+    color: #00b14f !important;
+}
+
+
+/* Label */
+
+.floatingActionLabel {
+    color: #374151;
+
+    font-size: 13px !important;
+    font-weight: 600 !important;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+    .floatingActions {
+        right: 18px;
+        bottom: 20px;
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+    .floatingActions {
+        right: 12px;
+        bottom: 16px;
+    }
+
+    .floatingActionLabel {
+        display: none;
+    }
+
+    .floatingActionItem {
+        padding: 8px;
+    }
+}

@@ -704,3 +704,95 @@
   align-items: center;
   justify-content: center;
 }
+
+/* =========================
+   APPLY DIALOG
+========================= */
+
+.applyDialog {
+  border-radius: 18px !important;
+}
+
+.applyDialogTitle {
+  padding:
+    24px
+    24px
+    12px !important;
+
+  color: var(--navy);
+
+  font-size: 20px !important;
+
+  font-weight: 700 !important;
+}
+
+.applyForm {
+  padding-top: 8px;
+}
+
+.applyDescription {
+  color:
+    var(--text-secondary);
+
+  font-size: 13px !important;
+
+  line-height: 1.6 !important;
+}
+
+.applyDialogActions {
+  padding:
+    8px
+    24px
+    24px !important;
+
+  gap: 8px;
+}
+
+.cancelApplyButton {
+  min-width:
+    100px !important;
+
+  height: 42px;
+
+  border-radius:
+    22px !important;
+
+  color:
+    var(--text-secondary) !important;
+
+  font-weight:
+    600 !important;
+
+  text-transform:
+    none !important;
+}
+
+.confirmApplyButton {
+  min-width:
+    140px !important;
+
+  height: 42px;
+
+  background:
+    var(--green) !important;
+
+  border-radius:
+    22px !important;
+
+  font-weight:
+    700 !important;
+
+  text-transform:
+    none !important;
+
+  box-shadow:
+    none !important;
+}
+
+.confirmApplyButton:hover {
+  background:
+    var(--green-dark) !important;
+
+  box-shadow:
+    none !important;
+}

@@ -20,7 +20,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
 import Header from "../../../components/header/Header.jsx";
 
-import {createCV,} from "../../../services/candidateService.js";
+import {createCV} from "../../../services/candidateService.js";
 
 import styles from "./CreateCVPage.module.css";
 
@@ -303,6 +303,13 @@ export default function CreateCVPage() {
                 "CREATE CV RESPONSE:",
                 response
             );
+
+            if (response?.cv_id) {
+                localStorage.setItem(
+                    "latest_cv_id",
+                    response.cv_id
+                );
+            }
 
             setSaveSuccess(
                 "CV đã được tạo thành công!"
