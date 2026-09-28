@@ -1,0 +1,11 @@
+services:
+  web:
+    container_name: f8-k19-docker-web
+    image: node:25
+    working_dir: /app/web
+    volumes:
+      - ./web01:/app/web
+    ports:
+      - 5173:5173
+    command:
+      ['npm', 'run', 'dev', '--', '--host']
