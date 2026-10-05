@@ -40,6 +40,7 @@ import styles
 
 const PAGE_SIZE = 10;
 
+/*way to admin's page http://localhost:5173/admin/companies*/
 
 /* =========================
    STATUS

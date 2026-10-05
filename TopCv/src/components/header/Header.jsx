@@ -85,7 +85,7 @@ function TopCvLogo({
    COMMON MENU ITEM
 ========================= */
 
-function MenuItem({item}) {
+function MenuItem({item, onClick}) {
     const Icon = item.icon;
 
     return (
@@ -94,6 +94,10 @@ function MenuItem({item}) {
             alignItems="center"
             spacing={1.5}
             className={styles.menuItem}
+            onClick={onClick}
+            sx={{
+                cursor: onClick ? "pointer" : "default",
+            }}
         >
             <Icon className={styles.menuIcon}/>
 
@@ -203,6 +207,12 @@ function JobMegaMenu() {
 ========================= */
 
 function CvMegaMenu() {
+    const navigate = useNavigate();
+
+    const handleCreateCv = () => {
+        navigate("/candidate/cv/create");
+    };
+
     return (
         <Box className={styles.megaMenu}>
             <Box className={styles.cvMenuGrid}>
@@ -216,6 +226,7 @@ function CvMegaMenu() {
                             <MenuItem
                                 key={item.label}
                                 item={item}
+                                onClick={handleCreateCv}
                             />
                         ))}
                     </Stack>
@@ -361,18 +372,18 @@ export default function Header({mode = "candidate", companyName = "",}) {
     };
 
     const handleNavClick = (item) => {
-    setOpenMenu(null);
+        if (item.menu === "cv") {
+            setOpenMenu("cv");
+            return;
+        }
 
-    if (item.menu === "cv") {
-        navigate("/candidate/cv/create");
-        return;
-    }
+        setOpenMenu(null);
 
-    if (item.menu === "jobs") {
-        navigate("/jobs");
-        return;
-    }
-};
+        if (item.menu === "jobs") {
+            navigate("/jobs");
+            return;
+        }
+    };
 
     return (
         <Box

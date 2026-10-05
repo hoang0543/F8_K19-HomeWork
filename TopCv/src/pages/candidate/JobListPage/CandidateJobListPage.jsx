@@ -47,7 +47,7 @@ import styles from "./CandidateJobListPage.module.css";
    CATEGORY + BANNER
 ========================================================= */
 
-function CategoriesAndBanner() {
+function CategoriesAndBanner({onCategorySelect}) {
     const theme = useTheme();
 
     const isMobile = useMediaQuery(
@@ -212,35 +212,31 @@ function CategoriesAndBanner() {
                     </Typography>
 
                     <Stack spacing={0}>
-                        {visibleCategories.map(
-                            (category) => (
-                                <Stack
-                                    key={
-                                        category
-                                    }
-                                    direction="row"
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                    className={
-                                        styles.categoryListItem
-                                    }
-                                >
-                                    <Typography
-                                        className={
-                                            styles.categoryListText
-                                        }
-                                    >
-                                        {category}
-                                    </Typography>
+                        {visibleCategories.map((category) => (
+                            <Stack
+                                key={category}
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="space-between"
+                                className={styles.categoryListItem}
 
-                                    <ChevronRightIcon
-                                        className={
-                                            styles.categoryListArrow
-                                        }
-                                    />
-                                </Stack>
-                            )
-                        )}
+                                onClick={() => onCategorySelect(category)}
+
+                                sx={{
+                                    cursor: "pointer",
+                                }}
+                            >
+                                <Typography
+                                    className={styles.categoryListText}
+                                >
+                                    {category}
+                                </Typography>
+
+                                <ChevronRightIcon
+                                    className={styles.categoryListArrow}
+                                />
+                            </Stack>
+                        ))}
                     </Stack>
 
 
@@ -1155,7 +1151,6 @@ export default function CandidateJobListPage() {
                 location || "",
         });
 
-
         requestAnimationFrame(() => {
             document
                 .getElementById(
@@ -1167,6 +1162,22 @@ export default function CandidateJobListPage() {
 
                     block:
                         "start",
+                });
+        });
+    };
+
+    const handleCategorySelect = (category) => {
+        setSearchParams((previous) => ({
+            ...previous,
+            category,
+        }));
+
+        requestAnimationFrame(() => {
+            document
+                .getElementById("job-list-section")
+                ?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
                 });
         });
     };
@@ -1193,7 +1204,7 @@ export default function CandidateJobListPage() {
                     }
                 />
 
-                <CategoriesAndBanner/>
+                <CategoriesAndBanner onCategorySelect={handleCategorySelect}/>
             </Box>
 
             <Box
@@ -1211,7 +1222,7 @@ export default function CandidateJobListPage() {
                     }
                 />
             </Box>
-            <FloatingActions />
+            <FloatingActions/>
         </Box>
     );
 }
